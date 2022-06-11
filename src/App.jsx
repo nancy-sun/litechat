@@ -1,11 +1,18 @@
-import './App.css';
+import Sidebar from "./components/Sidebar/Sidebar";
+import Welcome from "./pages/Welcome/Welcome";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
+import './App.scss';
 
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        {/* <Sidebar /> */}
+        <Welcome />
+      </div>
+    );
+  }
 }
 
 export default App;
