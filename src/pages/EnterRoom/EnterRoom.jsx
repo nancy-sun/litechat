@@ -1,14 +1,11 @@
+import { io } from "socket.io-client";
+import { useState } from "react";
+
+const socket = io.connect("http://localhost:5050");
+
+
 function EnterRoom() {
-    return (
-        <>
-            <form>
-                <label htmlFor="">Enter Room ID:
-                    <input type="text" />
-                </label>
-                <button>Enter Room</button>
-            </form>
-        </>
-    )
+
 }
 
 export default EnterRoom;

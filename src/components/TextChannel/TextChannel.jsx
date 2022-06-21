@@ -17,7 +17,6 @@ function TextChannel() {
             </div>
             <form className="message__input">
                 <label htmlFor="message">
-                    <div>upload image</div>
                     <input type="text" name="message" />
                 </label>
             </form>
