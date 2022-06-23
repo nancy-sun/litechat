@@ -13,8 +13,6 @@ import { SERVER_URL, ROOM_URL, POKE_API } from "../../utils/APIUtils";
 const socket = io.connect(SERVER_URL);
 
 function ChatRoom() {
-    // const [message, setMessage] = useState("");
-    // const [messageHistory, setMessageHistory] = useState([]);
     const [user, setUser] = useState({ userID: "", username: "" });
 
     let room = useParams().id;
@@ -54,12 +52,6 @@ function ChatRoom() {
     //     }).catch(e => console.log(e));
     // }
 
-    // const sendMsg = () => {
-    //     socket.emit("sendMsg", { message, room });
-    //     setMessageHistory(arr => [...arr, message]);
-    //     setMessage("");
-    // }
-
     useEffect(() => {
         emitJoin()
         console.log("test")
@@ -69,12 +61,6 @@ function ChatRoom() {
         postNewUser();
     }, [user])
 
-    // useEffect(() => {
-    //     socket.on("receiveMsg", (data) => {
-    //         setMessageHistory(arr => [...arr, data]);
-    //     })
-    // }, [socket]);
-
 
     return (
         <>
@@ -82,12 +68,6 @@ function ChatRoom() {
             <TextChannel userID={user.userID} socket={socket} room={room} />
 
             <div>welcome {user.username}</div>
-            {/* <label htmlFor="msg">
-                <input name="msg" onChange={(e) => {
-                    setMessage(e.target.value);
-                }} />
-                <button onClick={sendMsg}>send</button>
-            </label> */}
 
         </>
     )
