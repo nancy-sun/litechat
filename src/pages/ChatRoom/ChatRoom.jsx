@@ -62,6 +62,7 @@ function ChatRoom() {
 
     useEffect(() => {
         emitJoin()
+        console.log("message")
     }, [])
 
     useEffect(() => {
