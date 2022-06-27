@@ -7,7 +7,7 @@ import Peer from "simple-peer";
 
 function ChannelBar({ username, userID, room, socket, users }) {
 
-    // const userAudio = useRef();
+    const userAudio = useRef();
     const [peers, setPeers] = useState([]);
     const socketRef = useRef(socket);
     const peersRef = useRef([]);
@@ -17,7 +17,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
-                // userAudio.current.srcObject = stream;
+                userAudio.current.srcObject = stream;
                 socketRef.current.emit("joinVoice", room);
                 socketRef.current.on("allUsers", (users) => {
                     let peers = [];
@@ -98,7 +98,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
             </div>
             <button className="channel__voice">voice channel</button>
             <div>
-                {/* <audio ref={userAudio} muted autoPlay></audio> */}
+                <audio ref={userAudio} muted autoPlay></audio>
                 {peers.map((peer, i) => {
                     // console.log("peer - ", peer)
                     return (
