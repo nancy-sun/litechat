@@ -1,0 +1,25 @@
+@use "./variables" as *;
+
+@mixin tablet {
+    @media (min-width: $tablet-width) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: $desktop-width) {
+        @content;
+    }
+}
+
+@mixin roomBtn {
+    background-color: $primary-color;
+    height: 1rem;
+    width: 3rem;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.73rem;
+    border: none;
+    font-family: $title-font;
+    font-size: 500;
+}
