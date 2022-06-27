@@ -12,7 +12,7 @@ function ChannelUser({ peer }) {
             console.log(stream)
             ref.current.srcObject = stream;
         })
-    }, []);
+    }, [ref]);
 
     return (
         <div>
