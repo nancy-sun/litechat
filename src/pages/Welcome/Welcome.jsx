@@ -4,6 +4,7 @@ import axios from "axios";
 import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 import { v4 as uuid } from 'uuid';
 import { Link } from "react-router-dom";
+import "./Welcome.scss";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
@@ -26,7 +27,7 @@ function Welcome() {
         <>
             <div>
                 <div>
-                    <h1>Welcome to lite chat</h1>
+                    <h1 className="welcome__title">Welcome to lite chat</h1>
                     <h1>Create a chat room and start talking</h1>
                 </div>
                 <button onClick={createRoom}>create a room</button>

@@ -1,0 +1,9 @@
+@use "../../styles/partials/reset" as *;
+@use "../../styles/partials/typography" as *;
+
+.welcome {
+
+    &__title {
+        font-weight: 700;
+    }
+}
