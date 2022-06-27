@@ -12,6 +12,7 @@
     "react-router-dom": "5.3",
     "react-scripts": "5.0.1",
     "sass": "^1.52.3",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.5.1",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
@@ -39,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-error-overlay": "^6.0.9"
   }
 }

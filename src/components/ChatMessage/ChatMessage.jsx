@@ -1,11 +1,11 @@
-function ChatMessage({ message }) {
+function ChatMessage({ message, user, time }) {
     return (
         <div>
             <div>avatar</div>
             <div>
                 <div>
-                    <p></p>
-                    <p>time</p>
+                    <p>by: {user}</p>
+                    <p>time: {time}</p>
                     <button>delete message</button>
                 </div>
                 <p>{message}</p>

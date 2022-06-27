@@ -7,18 +7,17 @@ import { useParams } from "react-router-dom";
 import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 
 
-function TextChannel({ userID, socket, room }) {
+function TextChannel({ userID, username, socket, room }) {
     const [messageHistory, setMessageHistory] = useState([]);
 
     const postMsg = (msg) => {
-        axios.post(`${ROOM_URL}/${room}`, msg).then((response) => {
-            // console.log(response);
+        axios.post(`${ROOM_URL}/${room}`, msg).then(() => {
             return;
         }).catch(e => console.log(e));
     }
 
-    const emitMsg = async (message) => {
-        socket.emit("sendMsg", { message, room });
+    const emitMsg = async (msg) => {
+        socket.emit("sendMsg", { msg, room });
     }
 
     const sendMsg = async (e) => {
@@ -32,18 +31,17 @@ function TextChannel({ userID, socket, room }) {
         let msg = {
             messageID: uuid(),
             message: message,
-            userID: userID,
+            username: username,
             time: `${new Date(Date.now()).getHours()}:${new Date(Date.now()).getMinutes()}`
         }
 
-        await emitMsg(msg.message);
-        setMessageHistory([...messageHistory, msg.message]);
-        // postMsg(msg);
+        await emitMsg(msg);
+        setMessageHistory([...messageHistory, msg]);
+        postMsg(msg);
     }
 
     const receiveMsg = () => {
-        socket.on("receiveMsg", (data) => { //never get in here for some reason
-            console.log("message")
+        socket.on("receiveMsg", (data) => {
             console.log(data)
             setMessageHistory((messageHistory) => [...messageHistory, data]);
         })
@@ -59,8 +57,8 @@ function TextChannel({ userID, socket, room }) {
                 <p>Text channel</p>
             </div>
             <div className="message__section">
-                {messageHistory.map((content) => {
-                    return <ChatMessage key={content.messageID} message={content} />
+                {messageHistory.map((msg) => {
+                    return <ChatMessage key={msg.messageID} message={msg.message} user={msg.username} time={msg.time} />
                 })}
             </div>
             <form onSubmit={sendMsg}>
