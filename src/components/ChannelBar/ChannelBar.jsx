@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import ChannelUser from "../ChannelUser/ChannelUser";
-// import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 import "./ChannelBar.scss";
 import Peer from "simple-peer";
 
@@ -11,8 +10,6 @@ function ChannelBar({ username, userID, room, socket, users }) {
     const [peers, setPeers] = useState([]);
     const socketRef = useRef(socket);
     const peersRef = useRef([]);
-
-
 
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
@@ -98,7 +95,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
             </div>
             <button className="channel__voice">voice channel</button>
             <div>
-                <audio ref={userAudio} muted autoPlay></audio>
+                <audio ref={userAudio} muted autoPlay />
                 {peers.map((peer, i) => {
                     // console.log("peer - ", peer)
                     return (
@@ -111,7 +108,6 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 <button>sound</button>
                 {/* (tbd)sound settings */}
             </div>
-            {/* self */}
         </div>
     )
 }
