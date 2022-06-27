@@ -8,7 +8,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { SERVER_URL, ROOM_URL, POKE_API } from "../../utils/APIUtils";
 
-const socket = io.connect(SERVER_URL);
+const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 function ChatRoom() {
     let room = useParams().id;
@@ -27,7 +27,7 @@ function ChatRoom() {
 
     const setCurrentUser = (userID) => {
         const randomNum = Math.floor(Math.random() * 897) + 1;
-        axios.get(`${POKE_API}/${randomNum}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_POKE_API}/${randomNum}`).then((response) => {
             // console.log("in current user")
             setUser({ userID: userID, username: response.data.name });
         }).catch(e => console.log(e))
@@ -37,7 +37,7 @@ function ChatRoom() {
         // console.log(user);
         if (user.userID && user.username) {
             // console.log("In post user condition");
-            axios.post(`${ROOM_URL}/${room}/${user.userID}`, user).then((response) => {
+            axios.post(`${process.env.REACT_APP_ROOM_URL}/${room}/${user.userID}`, user).then((response) => {
                 // console.log("in post new user")
                 // console.log(response)
                 return;
@@ -54,7 +54,7 @@ function ChatRoom() {
     const [users, setUsers] = useState([])
 
     const getAllUsers = () => {
-        axios.get(`${ROOM_URL}/${room}/users`)
+        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}/users`)
             .then(response => {
                 setUsers(response);
             }).catch(e => console.log(e));

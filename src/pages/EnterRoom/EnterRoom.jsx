@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 
-const socket = io.connect(SERVER_URL);
+const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 
 function EnterRoom() {
@@ -13,7 +13,7 @@ function EnterRoom() {
             alert("please enter a room number");
             return;
         }
-        axios.get(`${ROOM_URL}/${event.target.room.value}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_ROOM_URL}/${event.target.room.value}`).then((response) => {
             console.log(response)
             if (response.data.roomID !== event.target.room.value) {
                 alert("invalid room number");

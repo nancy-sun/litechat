@@ -5,12 +5,12 @@ import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 import { v4 as uuid } from 'uuid';
 import { Link } from "react-router-dom";
 
-const socket = io.connect(SERVER_URL);
+const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 function Welcome() {
 
     const createRoom = () => {
-        axios.post(ROOM_URL, {
+        axios.post(process.env.REACT_APP_ROOM_URL, {
             roomID: uuid()
         }).then(response => {
             const room = response.data.roomID;

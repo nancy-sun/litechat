@@ -11,7 +11,7 @@ function TextChannel({ userID, username, socket, room }) {
     const [messageHistory, setMessageHistory] = useState([]);
 
     const postMsg = (msg) => {
-        axios.post(`${ROOM_URL}/${room}`, msg).then(() => {
+        axios.post(`${process.env.REACT_APP_ROOM_URL}/${room}`, msg).then(() => {
             return;
         }).catch(e => console.log(e));
     }
