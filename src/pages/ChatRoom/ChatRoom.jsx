@@ -45,11 +45,7 @@ function ChatRoom() {
         }
     }
 
-    // const userLeft = () => {
-    //     axios.delete(`${ROOM_URL}/${room}/${user}`).then(() => {
-    //         setUser("");
-    //     }).catch(e => console.log(e));
-    // }
+
 
     const [users, setUsers] = useState([])
 
@@ -68,6 +64,18 @@ function ChatRoom() {
     useEffect(() => {
         postNewUser();
     }, [user])
+
+
+    useEffect(() => {
+        const unloadCallback = (event) => {
+            event.preventDefault();
+            event.returnValue = "";
+            return "";
+        };
+
+        window.addEventListener("beforeunload", unloadCallback);
+        return () => window.removeEventListener("beforeunload", unloadCallback);
+    }, []);
 
 
     return (
