@@ -51,7 +51,6 @@ function ChannelBar({ username, userID, room, socket, users }) {
             trickle: false,
             stream,
             // config: {
-
             //     iceServers: [
             //         {
             //             urls:  //stun server
@@ -80,11 +79,10 @@ function ChannelBar({ username, userID, room, socket, users }) {
         peer.on("signal", (signal) => {
             socketRef.current.emit("returnSgn", { room, signal, caller })
         })
-
         peer.signal(incomingSignal);
-
         return peer;
     }
+
 
 
     return (
@@ -95,12 +93,12 @@ function ChannelBar({ username, userID, room, socket, users }) {
             </div>
             <button className="channel__voice">voice channel</button>
             <div>
-                <audio ref={userAudio} muted autoPlay />
                 {peers.map((peer, i) => {
                     return (
                         <ChannelUser key={i} peer={peer} />
                     )
                 })}
+                <audio ref={userAudio} muted autoPlay />
             </div>
             <div>
                 <button>mic</button>
