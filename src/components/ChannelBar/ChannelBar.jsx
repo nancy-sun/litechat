@@ -64,7 +64,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
         });
 
         peer.on("signal", (signal) => {
-            socketRef.current.emit("sendSgn", { userToSignal, caller, signal })
+            socketRef.current.emit("sendSgn", { room, userToSignal, caller, signal })
         })
 
         return peer;
@@ -78,7 +78,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
         })
 
         peer.on("signal", (signal) => {
-            socketRef.current.emit("returnSgn", { signal, caller })
+            socketRef.current.emit("returnSgn", { room, signal, caller })
         })
 
         peer.signal(incomingSignal);

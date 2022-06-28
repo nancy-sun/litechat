@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuid } from 'uuid';
 import { useParams } from "react-router-dom";
-import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 
 
 function TextChannel({ userID, username, socket, room }) {
