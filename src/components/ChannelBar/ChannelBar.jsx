@@ -97,7 +97,6 @@ function ChannelBar({ username, userID, room, socket, users }) {
             <div>
                 <audio ref={userAudio} muted autoPlay />
                 {peers.map((peer, i) => {
-                    // console.log("peer - ", peer)
                     return (
                         <ChannelUser key={i} peer={peer} />
                     )
