@@ -1,18 +1,10 @@
-.video {
-    border: 1px red solid;
-    background-color: black;
-    width: 100%;
+@use "../../styles/partials/_reset.scss" as *;
+@use "../../styles/partials/_typography.scss" as *;
+@use "../../styles/partials/_variables.scss" as *;
+@use "../../styles/partials/_mixins.scss" as *;
 
-    &__wrap {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        width: 80%;
-    }
-}
-
-.test {
-    width: 3rem;
-    height: 3rem;
-    background-color: blue;
+.room {
+    background-color: $primary-lighter;
+    width: 100vw;
+    display: flex;
 }

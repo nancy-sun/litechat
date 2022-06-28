@@ -1,4 +1,33 @@
+@use "../../styles/partials/_variables.scss" as *;
+
 .channel {
+    width: 15rem;
+    height: 100%;
+    background-color: #F7F7F7;
+
+    &__head {
+        display: flex;
+        height: 3rem;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        border-bottom: 2px $primary-light solid;
+        padding: 0 0.8rem;
+        align-items: center;
+    }
+
+    &__welcome {
+        font-size: 1rem;
+    }
+
+    &__share {
+        width: 1.3rem;
+        height: 1.3rem;
+        background-image: url("../../assets/share.svg");
+        background-repeat: no-repeat;
+        background-size: 1.3rem;
+        background-position: center;
+    }
 
     &__voice {
         background-color: slateblue;

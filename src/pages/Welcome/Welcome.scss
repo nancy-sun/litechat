@@ -1,9 +1,47 @@
-@use "../../styles/partials/reset" as *;
-@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/_reset.scss" as *;
+@use "../../styles/partials/_typography.scss" as *;
+@use "../../styles/partials/_variables.scss" as *;
+@use "../../styles/partials/_mixins.scss" as *;
 
-.welcome {
+.main {
+    background-color: $primary-lighter;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 16rem;
+    align-items: center;
+}
+
+.box {
+    display: flex;
+    width: 45rem;
+    height: 20rem;
+    background-color: white;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    box-sizing: border-box;
+    padding: 0 4rem;
+    border-radius: 8px;
 
     &__title {
         font-weight: 700;
+        font-size: 2.2rem;
+        line-height: 2.3rem
     }
+
+    &__btn {
+        @include roomBtn;
+        align-self: center;
+    }
+}
+
+.direct {
+    display: flex;
+    align-items: baseline;
+    align-self: baseline;
+    padding: 0 0 7.5rem 1.3rem;
+
+    &:hover {}
 }

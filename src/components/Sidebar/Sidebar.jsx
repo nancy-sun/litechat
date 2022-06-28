@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import "./Sidebar.scss"
 
 function Sidebar() {
     return (
-        <nav className="sidebar">
-            <div>
-                <Link to="/">temp user profile</Link>
+        <nav className="nav">
+            <div className="nav--top">
+                <NavLink to="/" className="nav__self"></NavLink>
             </div>
-            <div>
-                <Link to="/">create new chat room</Link>
-                <Link to="/">search for chat room</Link>
-                <Link to="/">backtohomepage</Link>
+            <div className="nav--bottom">
+                <NavLink to="/" exact className="nav__create" activeClassName="nav--active"></NavLink>
+                <NavLink to="/room" exact className="nav__join" activeClassName="nav--active"></NavLink>
+                <NavLink to="/" className="nav__leave"></NavLink>
             </div>
         </nav>
     )

@@ -90,8 +90,8 @@ function ChannelBar({ username, userID, room, socket, users }) {
     return (
         <div className="channel">
             <div className="channel__head">
-                <p className="channel__room">Room ID: </p>
-                <button className="channel__share">share room id</button>
+                <p className="channel__welcome">Welcome~ {username}</p>
+                <div className="channel__share"></div>
             </div>
             <button className="channel__voice">voice channel</button>
             <div>

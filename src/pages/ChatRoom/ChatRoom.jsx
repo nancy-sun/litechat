@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { SERVER_URL, ROOM_URL, POKE_API } from "../../utils/APIUtils";
+import "./ChatRoom.scss";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
@@ -71,11 +71,10 @@ function ChatRoom() {
 
 
     return (
-        <>
+        <main className="room">
             <ChannelBar username={user.username} userID={user.userID} room={room} socket={socket} users={users} />
             <TextChannel userID={user.userID} username={user.username} socket={socket} room={room} />
-            <div>welcome {user.username}</div>
-        </>
+        </main>
     )
 }
 

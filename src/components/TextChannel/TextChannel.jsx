@@ -1,9 +1,10 @@
 import ChatMessage from "../ChatMessage/ChatMessage";
-import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuid } from 'uuid';
-import { useParams } from "react-router-dom";
+import questionIcon from "../../assets/question.svg";
+import "./TextChannel.scss"
+
 
 
 function TextChannel({ userID, username, socket, room }) {
@@ -51,20 +52,20 @@ function TextChannel({ userID, username, socket, room }) {
     }, [socket])
 
     return (
-        <div>
-            <div>
-                <p>Text channel</p>
+        <div className="text">
+            <div className="text__head">
+                <p className="text__title">Text channel</p>
+                <img src={questionIcon} alt="about" className="text__about" />
             </div>
-            <div className="message__section">
+            <div className="text__messages">
                 {messageHistory.map((msg) => {
                     return <ChatMessage key={msg.messageID} message={msg.message} user={msg.username} time={msg.time} />
                 })}
             </div>
-            <form onSubmit={sendMsg}>
+            <form onSubmit={sendMsg} className="text__input">
                 <label htmlFor="content">
-                    <input name="content" />
+                    <input name="content" className="text__input--box" />
                 </label>
-                <button>send msg</button>
             </form>
         </div >
     )

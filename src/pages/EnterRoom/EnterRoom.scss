@@ -1,0 +1,34 @@
+@use "../../styles/partials/_variables.scss" as *;
+
+
+.box {
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: 2.3rem;
+        gap: 1.2rem;
+        text-align: center;
+        font-family: $title-font;
+    }
+
+    &__input {
+        border: none;
+        height: 4rem;
+        background-color: #EBEDEF;
+        border-radius: 5px;
+        background-image: url("../../assets/enter.svg");
+        background-repeat: no-repeat;
+        background-size: 2rem;
+        background-position: 97% center;
+        box-sizing: border-box;
+        padding: 5px 30px;
+        font-size: 1.5rem;
+
+        &:focus {
+            outline: #FFCA3A 2px solid;
+        }
+    }
+}

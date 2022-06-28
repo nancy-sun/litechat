@@ -4,6 +4,8 @@ import axios from "axios";
 import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 import { v4 as uuid } from 'uuid';
 import { Link } from "react-router-dom";
+import pointIcon from "../../assets/pointFinger.svg";
+import 'animate.css';
 import "./Welcome.scss";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
@@ -26,21 +28,19 @@ function Welcome() {
     };
 
     return (
-        <>
-            <div>
-                <div>
-                    <h1 className="welcome__title">Welcome to lite chat</h1>
-                    <h1>Create a chat room and start talking</h1>
+        <main className="main">
+            <div className="box">
+                <div className="box__titles">
+                    <h1 className="box__title">Welcome to lite chat</h1>
+                    <h1 className="box__title">Create a chat room and start talking</h1>
                 </div>
-                <button onClick={createRoom}>create a room</button>
+                <button onClick={createRoom} className="box__btn">create a room</button>
             </div>
-            <div>
-                <div></div>
-                <Link to="/room">
-                    <p>Click here to join a chat room</p>
-                </Link>
+            <div className="direct">
+                <img className="direct__icon  animate__animated animate__heartBeat" src={pointIcon} alt="point icon" />
+                <p className="direct__text">Click here to join a chat room</p>
             </div>
-        </>
+        </main>
     )
 }
 

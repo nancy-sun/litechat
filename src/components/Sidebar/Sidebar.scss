@@ -1,0 +1,55 @@
+@use "../../styles/partials/_variables.scss" as *;
+@use "../../styles/partials/_mixins.scss" as *;
+
+.nav {
+    background-color: $primary-light;
+    width: 5rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 1rem 0;
+
+    // @include tablet {}
+
+
+    &--bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 1rem;
+
+        @include tablet {}
+    }
+
+    &--top {
+        @extend .nav--bottom;
+    }
+
+    &__self {
+        @include navBtn("../../assets/self.svg")
+    }
+
+    &__create {
+        @include navBtn("../../assets/add.svg");
+        background-size: 60%
+    }
+
+    &__join {
+        @include navBtn("../../assets/searchIcon.svg");
+        background-position: 0.8rem;
+        background-size: 85%;
+    }
+
+    &__leave {
+        @include navBtn("../../assets/leaveRm.svg");
+        background-size: 75%;
+
+    }
+
+    &--active {
+        background-color: $primary-color;
+    }
+}

@@ -1,0 +1,58 @@
+@use "../../styles/partials/_variables.scss" as *;
+
+.text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+
+    &__head {
+        display: flex;
+        width: 100%;
+        height: 3rem;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        box-sizing: border-box;
+        border-bottom: 2px $primary-light solid;
+    }
+
+    &__title {
+        font-size: 1rem;
+    }
+
+    &__about {
+        cursor: pointer;
+    }
+
+    &__messages {
+        height: 100%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__input {
+        height: 3rem;
+        padding: 1rem;
+
+        &--box {
+            width: 100%;
+            height: 100%;
+            border: none;
+            padding: 0 1rem;
+            box-sizing: border-box;
+            background-color: $primary-lighter;
+            background-image: url("../../assets/enter.svg");
+            background-repeat: no-repeat;
+            background-size: 1.8rem;
+            background-position: 98% center;
+
+            &:focus {
+                outline: #FFCA3A 2px solid;
+            }
+        }
+    }
+
+}

@@ -3,13 +3,15 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Welcome from "./pages/Welcome/Welcome";
 import EnterRoom from "./pages/EnterRoom/EnterRoom";
 import ChatRoom from "./pages/ChatRoom/ChatRoom";
+import Sidebar from "./components/Sidebar/Sidebar";
 import './App.scss';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <BrowserRouter>
+          <Sidebar />
           <Switch>
             <Route path="/" exact component={Welcome} />
             <Route path="/room/:id" component={ChatRoom} />

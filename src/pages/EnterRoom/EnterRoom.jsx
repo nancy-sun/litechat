@@ -1,9 +1,8 @@
-import { io } from "socket.io-client";
-import axios from "axios";
-import { useState } from "react";
-import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 
-const socket = io.connect(process.env.REACT_APP_SERVER_URL);
+import axios from "axios";
+import "./EnterRoom.scss";
+
+
 
 
 function EnterRoom() {
@@ -25,12 +24,14 @@ function EnterRoom() {
     }
 
     return (
-        <form onSubmit={joinRoom}>
-            <label htmlFor="room">Enter Room ID:
-                <input type="text" name="room" />
-            </label>
-            <button>join room</button>
-        </form>
+        <main className="main">
+            <form onSubmit={joinRoom} className="box">
+                <label htmlFor="room" className="box__label">Enter Room ID:
+                    <input type="text" name="room" className="box__input" />
+                </label>
+                <button className="box__btn">join room</button>
+            </form>
+        </main>
     )
 }
 
