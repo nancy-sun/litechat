@@ -49,7 +49,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
         const peer = new Peer({
             initiator: true,
             trickle: false,
-            stream,
+            stream: stream,
             // config: {
             //     iceServers: [
             //         {
