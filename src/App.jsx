@@ -7,7 +7,9 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import './App.scss';
 
 class App extends React.Component {
+
   render() {
+    console.log(process.env);
     return (
       <div className="app">
         <BrowserRouter>
