@@ -3,7 +3,7 @@ import Peer from "simple-peer";
 
 
 function ChannelUser({ peer }) {
-    console.log(peer)
+    // console.log(peer)
 
     const ref = useRef();
 
