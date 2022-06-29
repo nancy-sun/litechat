@@ -27,6 +27,16 @@
         background-repeat: no-repeat;
         background-size: 1.3rem;
         background-position: center;
+        cursor: pointer;
+
+        &--tooltip {
+            background-color: $secondary-color;
+            margin: 0.6rem 0 0 1rem;
+            box-sizing: border-box;
+            border-radius: 20px;
+            padding: 0.3rem 0.7rem;
+            position: fixed;
+        }
     }
 
     &__voice {

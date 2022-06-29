@@ -2,9 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import ChannelUser from "../ChannelUser/ChannelUser";
 import "./ChannelBar.scss";
 import Peer from "simple-peer";
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+
 
 
 function ChannelBar({ username, userID, room, socket, users }) {
+
+    const [clicked, setClicked] = useState(false);
 
     const userAudio = useRef();
     const [peers, setPeers] = useState([]);
@@ -84,13 +88,39 @@ function ChannelBar({ username, userID, room, socket, users }) {
         return peer;
     }
 
+    const copyLink = () => {
+        navigator.clipboard.writeText(window.location.href).then(setClicked(true));
+    }
+
 
 
     return (
         <div className="channel">
             <div className="channel__head">
                 <p className="channel__welcome">Welcome~ {username}</p>
-                <div className="channel__share"></div>
+                {clicked ?
+                    (<OverlayTrigger trigger="click"
+                        placement="bottom"
+                        overlay={
+                            <Tooltip id={"tooltip-bottom"} className="channel__share--tooltip">
+                                copied
+                            </Tooltip>
+                        }
+                    >
+                        <button className="channel__share" onClick={copyLink}></button>
+                    </OverlayTrigger>)
+                    :
+                    (<OverlayTrigger trigger="hover"
+                        placement="bottom"
+                        overlay={
+                            <Tooltip id={"tooltip-bottom"} className="channel__share--tooltip">
+                                share link
+                            </Tooltip>
+                        }
+                    >
+                        <button className="channel__share" onClick={copyLink}></button>
+                    </OverlayTrigger>)
+                }
             </div>
             <button className="channel__voice">voice channel</button>
             <div>

@@ -28,11 +28,21 @@ function TextChannel({ userID, username, socket, room }) {
             return;
         }
 
+        let now = new Date(Date.now());
+        let minute = now.getMinutes();
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+        let hour = now.getHours();
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+
         let msg = {
             messageID: uuid(),
             message: message,
             username: username,
-            time: `${new Date(Date.now()).getHours()}:${new Date(Date.now()).getMinutes()}`
+            time: `${hour}:${minute}`
         }
 
         await emitMsg(msg);
