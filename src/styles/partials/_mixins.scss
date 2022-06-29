@@ -14,8 +14,6 @@
 
 @mixin roomBtn {
     background-color: $primary-color;
-    height: 3rem;
-    width: 25rem;
     cursor: pointer;
     text-align: center;
     font-size: 0.73rem;
@@ -28,14 +26,19 @@
     border-radius: 10px;
     transition: 0.2s;
 
+    width: 85%;
+    height: 3rem;
+
+
+
     &:hover {
         border-radius: 30px;
     }
+
 }
 
 @mixin navBtn ($iconURL) {
-    height: 50px;
-    width: 50px;
+
     background-image: url($iconURL);
     background-color: white;
     background-repeat: no-repeat;
@@ -44,6 +47,9 @@
     cursor: pointer;
     border: none;
     transition: 0.2s;
+    margin: 0 0.5rem;
+    height: 50px;
+    width: 50px;
 
     &:hover {
         border-radius: 30%;

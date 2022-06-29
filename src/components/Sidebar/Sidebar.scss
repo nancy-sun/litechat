@@ -2,26 +2,29 @@
 @use "../../styles/partials/_mixins.scss" as *;
 
 .nav {
+
+
     background-color: $primary-light;
-    width: 5rem;
-    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     padding: 1rem 0;
 
-    // @include tablet {}
+
+    @include tablet {
+        flex-direction: column;
+    }
 
 
     &--bottom {
         display: flex;
-        flex-direction: column;
         justify-content: flex-end;
         gap: 1rem;
 
-        @include tablet {}
+        @include tablet {
+            flex-direction: column;
+        }
     }
 
     &--top {
