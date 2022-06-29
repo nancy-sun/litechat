@@ -9,18 +9,15 @@ function ChannelUser({ peer }) {
 
     useEffect(() => {
         peer.on("stream", (stream) => {
-            console.log(stream)
             ref.current.srcObject = stream;
         })
-    }, [ref]);
+    }, []);
 
     return (
         <div>
             <audio ref={ref} autoPlay />
-
-            <div>user avatar</div>
+            <div className="user__avatar"></div>
             {/* <button>mute status</button> */}
-
         </div>
     )
 }

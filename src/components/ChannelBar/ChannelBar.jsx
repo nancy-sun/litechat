@@ -16,12 +16,13 @@ function ChannelBar({ username, userID, room, socket, users }) {
             .then((stream) => {
                 userAudio.current.srcObject = stream;
                 socketRef.current.emit("joinVoice", room);
+                console.log(room)
                 socketRef.current.on("allUsers", (users) => {
                     let peers = [];
                     users.forEach((user) => {
-                        const peer = createPeer(user.userID, socketRef.current.id, stream);
+                        const peer = createPeer(user, socketRef.current.id, stream);
                         peersRef.current.push({
-                            peerID: user.userID,
+                            peerID: user,
                             peer,
                         })
                         peers.push(peer);
@@ -39,8 +40,8 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 });
 
                 socketRef.current.on("receiveSgn", (payload) => {
-                    const item = peersRef.current.find((peer) => peer.peerID === payload.id);
-                    item.peer.signal(payload.signal);
+                    const sgn = peersRef.current.find((peer) => peer.peerID === payload.id);
+                    sgn.peer.signal(payload.signal);
                 });
             })
     }, []);
@@ -63,7 +64,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
         });
 
         peer.on("signal", (signal) => {
-            socketRef.current.emit("sendSgn", { room, userToSignal, caller, signal })
+            socketRef.current.emit("sendSgn", { userToSignal, caller, signal })
         })
 
         return peer;
@@ -77,7 +78,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
         })
 
         peer.on("signal", (signal) => {
-            socketRef.current.emit("returnSgn", { room, signal, caller })
+            socketRef.current.emit("returnSgn", { signal, caller })
         })
         peer.signal(incomingSignal);
         return peer;
