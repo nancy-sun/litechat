@@ -9,6 +9,16 @@ import "./TextChannel.scss"
 
 function TextChannel({ userID, username, socket, room }) {
     const [messageHistory, setMessageHistory] = useState([]);
+    const [pastMsgs, setPastMsgs] = useState([]);
+
+    const getMsgs = () => {
+        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(response => {
+            const msgs = response.data.messageHistory;
+            console.log(msgs);
+
+            setMessageHistory(msgs);
+        }).catch(e => console.log(e));
+    }
 
     const postMsg = (msg) => {
         axios.post(`${process.env.REACT_APP_ROOM_URL}/${room}`, msg).then(() => {
@@ -60,6 +70,10 @@ function TextChannel({ userID, username, socket, room }) {
     useEffect(() => {
         receiveMsg();
     }, [socket])
+
+    useEffect(() => {
+        getMsgs();
+    }, [])
 
     return (
         <div className="text">
