@@ -35,7 +35,7 @@ function Welcome() {
                 <button onClick={createRoom} className="box__btn">create a room</button>
             </div>
             <div className="direct">
-                <img className="direct__icon  animate__animated animate__heartBeat" src={pointIcon} alt="point icon" />
+                <img className="direct__icon" src={pointIcon} alt="point icon" />
                 <p className="direct__text">Click here to join a chat room</p>
             </div>
         </main>

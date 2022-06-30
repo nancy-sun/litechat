@@ -1,8 +1,7 @@
 
 import axios from "axios";
+import pointIcon from "../../assets/pointFinger.svg";
 import "./EnterRoom.scss";
-
-
 
 
 function EnterRoom() {
@@ -31,6 +30,10 @@ function EnterRoom() {
                 </label>
                 <button className="box__btn">join room</button>
             </form>
+            <div className="direct--create">
+                <img className="direct--create__icon" src={pointIcon} alt="point icon" />
+                <p className="direct--create__text">Click here to create a chat room</p>
+            </div>
         </main>
     )
 }
