@@ -9,14 +9,19 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 15rem;
     align-items: center;
+    padding-top: 17rem;
+    height: 100%;
+
+    @include tablet {
+        height: auto;
+        padding-top: 15rem;
+    }
 }
 
 .box {
     display: flex;
-    width: 80%;
-    max-width: 89%;
+    width: 89%;
     background-color: white;
     flex-direction: column;
     justify-content: center;
@@ -27,7 +32,8 @@
     // height: 20rem;
 
     @include tablet {
-        padding: 3rem 4rem;
+        padding: 5rem 4rem;
+        max-width: 50rem;
     }
 
     &__title {
@@ -65,13 +71,23 @@
 }
 
 .direct {
-    transform: rotate(270deg);
+    display: flex;
+    align-self: flex-end;
+    padding: 0 4.5rem 0.5rem 0;
 
     @include tablet {
-        display: flex;
         align-items: baseline;
         align-self: baseline;
         padding: 0 0 3.8rem 1.3rem;
+        transform: none;
+    }
+
+    &__icon {
+        transform: rotate(270deg);
+
+        @include tablet {
+            transform: none;
+        }
     }
 
     &__text {
