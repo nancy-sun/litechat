@@ -20,7 +20,6 @@ function ChannelBar({ username, userID, room, socket, users }) {
             .then((stream) => {
                 userAudio.current.srcObject = stream;
                 socketRef.current.emit("joinVoice", room);
-                console.log(room)
                 socketRef.current.on("allUsers", (users) => {
                     let peers = [];
                     users.forEach((user) => {
@@ -110,7 +109,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
                         <button className="channel__share" onClick={copyLink}></button>
                     </OverlayTrigger>)
                     :
-                    (<OverlayTrigger trigger="hover"
+                    (<OverlayTrigger trigger="hover focus"
                         placement="bottom"
                         overlay={
                             <Tooltip id={"tooltip-bottom"} className="channel__share--tooltip">
