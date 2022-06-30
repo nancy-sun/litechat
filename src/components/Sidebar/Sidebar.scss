@@ -9,11 +9,12 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 1rem 0;
+    padding: 0.3rem 0;
 
 
     @include tablet {
         flex-direction: column;
+        padding: 1rem 0;
     }
 
 
@@ -32,24 +33,31 @@
     }
 
     &__self {
-        @include navBtn("../../assets/self.svg")
+        @include navBtn("../../assets/self.svg");
+        background-size: 1.2rem;
+
+        @include tablet {
+            background-size: 1.8rem;
+        }
     }
 
     &__create {
         @include navBtn("../../assets/add.svg");
-        background-size: 60%
     }
 
     &__join {
         @include navBtn("../../assets/searchIcon.svg");
-        background-position: 0.8rem;
+        background-position: 0.58rem;
         background-size: 85%;
+
+        @include tablet {
+            background-position: 0.8rem;
+        }
     }
 
     &__leave {
         @include navBtn("../../assets/leaveRm.svg");
         background-size: 75%;
-
     }
 
     &--active {

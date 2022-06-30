@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import Peer from "simple-peer";
+import soundOnIcon from "../../assets/soundon.svg";
+import "./ChannelUser.scss";
 
 
 function ChannelUser({ peer }) {
@@ -14,10 +15,13 @@ function ChannelUser({ peer }) {
     }, []);
 
     return (
-        <div>
+        <div className="user">
             <audio ref={ref} autoPlay />
             <div className="user__avatar"></div>
-            {/* <button>mute status</button> */}
+            <p className="user__name">gfaasgadsfsadfasfassdfaff</p>
+            <button className="user__status">
+                <img className="user__status--icon" src={soundOnIcon} alt="sound" />
+            </button>
         </div>
     )
 }

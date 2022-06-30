@@ -122,8 +122,8 @@ function ChannelBar({ username, userID, room, socket, users }) {
                     </OverlayTrigger>)
                 }
             </div>
-            <button className="channel__voice">voice channel</button>
-            <div>
+            <button className="channel__voice"> voice</button>
+            <div className="channel__users">
                 {peers.map((peer, i) => {
                     return (
                         <ChannelUser key={i} peer={peer} />
@@ -131,7 +131,8 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 })}
                 <audio ref={userAudio} muted autoPlay />
             </div>
-            <div>
+            <div className="channel__self">
+                self
                 <button>mic</button>
                 <button>sound</button>
                 {/* (tbd)sound settings */}

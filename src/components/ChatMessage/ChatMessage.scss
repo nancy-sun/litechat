@@ -1,4 +1,5 @@
 @use "../../styles/partials/_variables.scss" as *;
+@use "../../styles/partials/_mixins.scss" as *;
 
 .message {
     display: flex;
@@ -8,13 +9,7 @@
     box-sizing: border-box;
 
     &__avatar {
-        height: 40px;
-        min-width: 40px;
-        border-radius: 50%;
-        background-image: url("../../assets/self.svg");
-        background-repeat: no-repeat;
-        background-position: center;
-        border: 1px solid;
+        @include avatar(40px);
     }
 
     &__content {

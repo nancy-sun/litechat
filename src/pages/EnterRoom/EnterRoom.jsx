@@ -25,7 +25,7 @@ function EnterRoom() {
 
     return (
         <main className="main">
-            <form onSubmit={joinRoom} className="box">
+            <form onSubmit={joinRoom} className="box box__join">
                 <label htmlFor="room" className="box__label">Enter Room ID:
                     <input type="text" name="room" className="box__input" />
                 </label>
