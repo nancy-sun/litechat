@@ -15,7 +15,41 @@ function ChannelBar({ username, userID, room, socket, users }) {
     const socketRef = useRef(socket);
     const peersRef = useRef([]);
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    //         .then((stream) => {
+    //             userAudio.current.srcObject = stream;
+    //             socketRef.current.emit("joinVoice", room);
+    //             socketRef.current.on("allUsers", (users) => {
+    //                 let peers = [];
+    //                 users.forEach((user) => {
+    //                     const peer = createPeer(user, socketRef.current.id, stream);
+    //                     peersRef.current.push({
+    //                         peerID: user,
+    //                         peer,
+    //                     })
+    //                     peers.push(peer);
+    //                 })
+    //                 setPeers(peers);
+    //             })
+
+    //             socketRef.current.on("voiceJoined", (payload) => {
+    //                 const peer = addPeer(payload.signal, payload.caller, stream);
+    //                 peersRef.current.push({
+    //                     peerID: payload.caller,
+    //                     peer,
+    //                 })
+    //                 setPeers((users) => [...users, peer]);
+    //             });
+
+    //             socketRef.current.on("receiveSgn", (payload) => {
+    //                 const sgn = peersRef.current.find((peer) => peer.peerID === payload.id);
+    //                 sgn.peer.signal(payload.signal);
+    //             });
+    //         })
+    // }, []);
+
+    const enterVoice = () => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
                 userAudio.current.srcObject = stream;
@@ -47,7 +81,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
                     sgn.peer.signal(payload.signal);
                 });
             })
-    }, []);
+    }
 
     const createPeer = (userToSignal, caller, stream) => {
         const peer = new Peer({
@@ -121,7 +155,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
                     </OverlayTrigger>)
                 }
             </div>
-            <button className="channel__voice"> voice</button>
+            <button className="channel__voice" onClick={enterVoice}> voice</button>
             <div className="channel__users">
                 {peers.map((peer, i) => {
                     return (
