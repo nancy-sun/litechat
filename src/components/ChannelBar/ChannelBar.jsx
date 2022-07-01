@@ -4,6 +4,7 @@ import "./ChannelBar.scss";
 import Peer from "simple-peer";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import soundOnIcon from "../../assets/soundon.svg";
+import axios from "axios";
 
 
 
@@ -18,15 +19,22 @@ function ChannelBar({ username, userID, room, socket, users }) {
     const peersRef = useRef([]);
     const [voiceEntered, setVoiceEntered] = useState(false);
 
-    // useEffect(() => {
+    // const newVoiceUser = () => {
 
-    // }, []);
+    // }
 
     const enterVoice = () => {
         setVoiceEntered(true);
         if (voiceEntered === true) {
             return;
         }
+
+        // newVoiceUser();
+        axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { userID: userID, username: username }).then((response) => {
+            // return;
+            console.log(response)
+        }).catch(e => console.log(e))
+
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
                 userAudio.current.srcObject = stream;
@@ -57,12 +65,20 @@ function ChannelBar({ username, userID, room, socket, users }) {
                     const sgn = peersRef.current.find((peer) => peer.peerID === payload.id);
                     sgn.peer.signal(payload.signal);
                 });
-
-                // socketRef.current.on("disconnected", ()=>{
-
-                // })
             })
     }
+
+    const handleUserLeft = () => {
+        socketRef.current.on("disconnected", (userID) => {
+            axios.delete(`${process.env.REACT_APP_ROOM_URL}/${room}/${userID}`).then((response) => {
+                console.log(response)
+            }).catch(e => console.log(e))
+        })
+    }
+
+    useEffect(() => {
+        handleUserLeft();
+    }, []);
 
     const createPeer = (userToSignal, caller, stream) => {
         const peer = new Peer({
@@ -110,6 +126,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
             }, 1000);
         });
     }
+
 
 
     return (

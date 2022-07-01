@@ -34,11 +34,9 @@ function ChatRoom() {
     }
 
     const postNewUser = () => {
-        // console.log(user);
         if (user.userID && user.username) {
             // console.log("In post user condition");
-            axios.post(`${process.env.REACT_APP_ROOM_URL}/${room}/${user.userID}`, user).then((response) => {
-                // console.log("in post new user")
+            axios.post(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, user).then((response) => {
                 // console.log(response)
                 return;
             }).catch(e => console.log(e))
@@ -46,13 +44,13 @@ function ChatRoom() {
     }
 
 
-
     const [users, setUsers] = useState([])
 
     const getAllUsers = () => {
-        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}/users`)
+        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`)
             .then(response => {
-                setUsers(response.data);
+                let users = response.data.users
+                setUsers(users);
             }).catch(e => console.log(e));
     }
 
@@ -77,14 +75,6 @@ function ChatRoom() {
         return () => window.removeEventListener("beforeunload", unloadCallback);
     }, []);
 
-    // useEffect(() => {
-    //     return () => {
-    //         console.log("unmounting");
-    //         axios.delete(`${process.env.REACT_APP_ROOM_URL}/${room}/${user.userID}`).then(() => {
-    //             return;
-    //         }).catch((e) => console.log(e));
-    //     }
-    // }, [])
 
 
     return (
