@@ -1,0 +1,60 @@
+@use "../../styles/partials/_variables.scss" as *;
+@use "../../styles/partials/_mixins.scss" as *;
+@use "../../styles/partials/_reset.scss" as *;
+
+.about {
+    background-image: url("../../assets/question.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    box-sizing: border-box;
+    height: 60%;
+    width: 1.5rem;
+
+    &__overlay {
+        background-color: $secondary-light;
+        height: 10rem;
+        width: 14rem;
+        margin-top: 0.5rem;
+        overflow: hidden;
+        display: flex;
+        border-radius: 15px;
+        flex-direction: column;
+        position: fixed;
+        box-shadow: 3px 2px $primary-light;
+        box-sizing: border-box;
+        padding: 1rem;
+        justify-content: space-between;
+    }
+
+    &__title {
+        font-size: 1.1rem;
+    }
+
+    &__text {
+        font-size: 1rem;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    &__contact {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__github {
+        @include contactIcon("../../assets/githubIcon.svg");
+    }
+
+    &__linkedin {
+        @include contactIcon("../../assets/linkedinIcon.svg");
+    }
+
+    &__email {
+        @include contactIcon("../../assets/emailIcon.svg");
+    }
+}

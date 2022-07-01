@@ -1,4 +1,5 @@
 @use "../../styles/partials/_variables.scss" as *;
+@use "../../styles/partials/_mixins.scss" as *;
 
 .text {
     width: 100%;
@@ -13,13 +14,14 @@
         height: 3rem;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;
+        padding: 0 1rem;
         box-sizing: border-box;
         border-bottom: 2px $primary-light solid;
     }
 
     &__title {
         font-size: 1rem;
+        padding: 1rem 0;
     }
 
     &__about {

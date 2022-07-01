@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuid } from 'uuid';
 import questionIcon from "../../assets/question.svg";
+import About from "../About/About";
 import "./TextChannel.scss"
 
 
@@ -79,7 +80,7 @@ function TextChannel({ userID, username, socket, room }) {
         <div className="text">
             <div className="text__head">
                 <p className="text__title">Text channel</p>
-                <img src={questionIcon} alt="about" className="text__about" />
+                <About />
             </div>
             <div className="text__messages">
                 {messageHistory.map((msg) => {

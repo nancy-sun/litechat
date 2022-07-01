@@ -71,3 +71,16 @@
     background-size: 60%;
     border: 1px solid;
 }
+
+@mixin contactIcon($url) {
+    background-image: url($url);
+    height: 1.8rem;
+    width: 1.8rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    @include tablet {
+        height: 2rem;
+        width: 2rem;
+    }
+}
