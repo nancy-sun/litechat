@@ -12,13 +12,9 @@ function EnterRoom() {
             return;
         }
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${event.target.room.value}`).then((response) => {
-            console.log(response)
-            if (response.data.roomID !== event.target.room.value) {
-                alert("invalid room number");
-                return;
-            } else {
-                window.location.replace(`/room/${event.target.room.value}`);
-            }
+
+            window.location.replace(`/room/${response.data.roomID}`);
+
         }).catch(e => console.log(e))
     }
 

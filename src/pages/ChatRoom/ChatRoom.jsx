@@ -50,9 +50,9 @@ function ChatRoom() {
     const [users, setUsers] = useState([])
 
     const getAllUsers = () => {
-        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}/users`)
+        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`)
             .then(response => {
-                setUsers(response.data);
+                setUsers(response.data.users);
             }).catch(e => console.log(e));
     }
 
