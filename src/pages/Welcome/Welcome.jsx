@@ -13,11 +13,6 @@ function Welcome() {
         axios.post(process.env.REACT_APP_ROOM_URL, {
             roomID: uuid()
         }).then(response => {
-            const room = response.data.roomID;
-            console.log(response);
-            socket.emit("join", room, (data) => {
-                console.log("user", data) //user id
-            });
             window.location.replace(`/room/${room}`);
         }).catch(e => console.log(e));
     };
