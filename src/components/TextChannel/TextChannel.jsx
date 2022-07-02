@@ -14,8 +14,6 @@ function TextChannel({ userID, username, socket, room }) {
     const getMsgs = () => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(response => {
             const msgs = response.data.messageHistory;
-            console.log(msgs);
-
             setMessageHistory(msgs);
         }).catch(e => console.log(e));
     }

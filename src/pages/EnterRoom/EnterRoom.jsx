@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import pointIcon from "../../assets/pointFinger.svg";
+import About from "../../components/About/About";
 import "./EnterRoom.scss";
 
 
@@ -20,6 +21,9 @@ function EnterRoom() {
 
     return (
         <main className="main">
+            <div className="main__about">
+                <About />
+            </div>
             <form onSubmit={joinRoom} className="box box__join">
                 <label htmlFor="room" className="box__label">Enter Room ID:
                     <input type="text" name="room" className="box__input" />
@@ -27,8 +31,8 @@ function EnterRoom() {
                 <button className="box__btn">join room</button>
             </form>
             <div className="direct--create">
-                <img className="direct--create__icon" src={pointIcon} alt="point icon" />
-                <p className="direct--create__text">Click here to create a chat room</p>
+                <img className="direct__icon" src={pointIcon} alt="point icon" />
+                <p className="direct__text">Click here to create a chat room</p>
             </div>
         </main>
     )

@@ -5,15 +5,23 @@
 
 .main {
     background-color: $primary-lighter;
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100%;
 
-    @include tablet {
-        height: auto;
+    &__about {
+        align-self: flex-end;
+        height: 3rem;
+        padding: 1rem 1rem 0 0;
+
+        @include tablet {
+            height: 4rem;
+            padding: 1.5rem 1.5rem 0 0;
+
+        }
     }
 }
 
@@ -28,11 +36,12 @@
     border-radius: 8px;
     padding: 3rem 0.7rem;
     margin: auto;
+    margin-top: 28vh;
 
     @include tablet {
         padding: 5rem 4rem;
         max-width: 50rem;
-        margin: auto;
+        margin-top: 20vh;
     }
 
     &__title {
@@ -73,7 +82,6 @@
     animation: heartBeat;
     animation-duration: 1.5s;
     overflow: hidden;
-    // width: max-content;
 
     @include tablet {
         align-items: baseline;
@@ -95,6 +103,7 @@
 
         @include tablet {
             display: block;
+            font-size: 1rem;
         }
     }
 }

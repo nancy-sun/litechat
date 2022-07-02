@@ -21,7 +21,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
     const newVoiceUser = () => {
         axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { username: username, userID: userID })
             .then((response) => {
-                console.log(response.data)
+                return;
             }).catch(e => console.log(e));
     }
 

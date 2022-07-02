@@ -4,10 +4,11 @@
 
 .box {
     &__join {
-        margin-top: 15rem;
+        margin: auto;
+        margin-top: 23vh;
 
         @include tablet {
-            margin-top: 13rem;
+            margin-top: 18vh;
         }
     }
 
@@ -68,15 +69,6 @@
 
         @include tablet {
             transform: none;
-        }
-    }
-
-    &__text {
-        font-size: 0.7rem;
-
-        @include tablet {
-            display: block;
-            font-size: 1rem;
         }
     }
 }

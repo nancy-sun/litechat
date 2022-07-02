@@ -2,6 +2,7 @@ import { io } from "socket.io-client";
 import axios from "axios";
 import { v4 as uuid } from 'uuid';
 import pointIcon from "../../assets/pointFinger.svg";
+import About from "../../components/About/About";
 import 'animate.css';
 import "./Welcome.scss";
 
@@ -21,6 +22,9 @@ function Welcome() {
 
     return (
         <main className="main">
+            <div className="main__about">
+                <About />
+            </div>
             <div className="box">
                 <div className="box__titles">
                     <h1 className="box__title">Welcome to lite chat</h1>
