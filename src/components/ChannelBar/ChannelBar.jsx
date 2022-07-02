@@ -9,6 +9,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 function ChannelBar({ username, userID, room, socket, users }) {
 
     const [clicked, setClicked] = useState(false);
+    const [voiceEnter, setVoiceEnter] = useState(false);
 
     const userAudio = useRef();
     const [peers, setPeers] = useState([]);
@@ -17,6 +18,8 @@ function ChannelBar({ username, userID, room, socket, users }) {
 
 
     const enterVoice = () => {
+        if (voiceEnter === true) return;
+        setVoiceEnter(true);
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
                 userAudio.current.srcObject = stream;
