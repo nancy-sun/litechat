@@ -26,8 +26,8 @@ function ChannelBar({ username, userID, room, socket, users }) {
     }
 
     const enterVoice = () => {
-        if (voiceEnter === true) return;
-        setVoiceEnter(true);
+        // if (voiceEnter === true) return;
+        // setVoiceEnter(true);
         newVoiceUser();
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
