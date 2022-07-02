@@ -22,6 +22,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
         setVoiceEnter(true);
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
+                setVoiceEnter(true);
                 userAudio.current.srcObject = stream;
                 socketRef.current.emit("joinVoice", room);
                 socketRef.current.on("allUsers", (users) => {
