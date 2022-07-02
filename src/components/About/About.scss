@@ -35,7 +35,10 @@
     }
 
     &__text {
-        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35em;
+        font-size: 0.8rem;
     }
 
     &__body {
@@ -46,6 +49,7 @@
     }
 
     &__contact {
+        padding-top: 0.1rem;
         display: flex;
         justify-content: space-around;
     }

@@ -167,12 +167,12 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 })}
                 <audio ref={userAudio} muted autoPlay />
             </div>
-            <div className="channel__self">
+            {/* <div className="channel__self">
                 self
                 <button>mic</button>
                 <button>sound</button>
-                {/* (tbd)sound settings */}
-            </div>
+                (tbd)sound settings
+            </div> */}
         </div>
     )
 }

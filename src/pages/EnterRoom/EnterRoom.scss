@@ -3,6 +3,13 @@
 
 
 .box {
+    &__join {
+        margin-top: 15rem;
+
+        @include tablet {
+            margin-top: 13rem;
+        }
+    }
 
     &__label {
         display: flex;
@@ -69,6 +76,7 @@
 
         @include tablet {
             display: block;
+            font-size: 1rem;
         }
     }
 }

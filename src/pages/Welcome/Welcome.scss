@@ -47,12 +47,6 @@
             line-height: 2.3rem
         }
 
-        // &:first-child {
-
-        //     @include tablet
-        //     font-size: 1.7rem;
-        // }
-
         &:last-child {
             display: none;
 
@@ -79,6 +73,7 @@
     animation: heartBeat;
     animation-duration: 1.5s;
     overflow: hidden;
+    // width: max-content;
 
     @include tablet {
         align-items: baseline;
