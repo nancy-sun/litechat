@@ -77,15 +77,6 @@ function ChatRoom() {
         return () => window.removeEventListener("beforeunload", unloadCallback);
     }, []);
 
-    // useEffect(() => {
-    //     return () => {
-    //         console.log("unmounting");
-    //         axios.delete(`${process.env.REACT_APP_ROOM_URL}/${room}/${user.userID}`).then(() => {
-    //             return;
-    //         }).catch((e) => console.log(e));
-    //     }
-    // }, [])
-
 
     return (
         <main className="room">

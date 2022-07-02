@@ -10,7 +10,6 @@ import "./TextChannel.scss"
 
 function TextChannel({ userID, username, socket, room }) {
     const [messageHistory, setMessageHistory] = useState([]);
-    const [pastMsgs, setPastMsgs] = useState([]);
 
     const getMsgs = () => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(response => {

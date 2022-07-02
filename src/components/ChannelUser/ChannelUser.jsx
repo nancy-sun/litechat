@@ -4,7 +4,6 @@ import "./ChannelUser.scss";
 
 
 function ChannelUser({ peer }) {
-    // console.log(peer)
 
     const ref = useRef();
 

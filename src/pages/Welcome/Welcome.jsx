@@ -1,9 +1,6 @@
 import { io } from "socket.io-client";
-import { useState } from "react";
 import axios from "axios";
-import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 import { v4 as uuid } from 'uuid';
-import { Link } from "react-router-dom";
 import pointIcon from "../../assets/pointFinger.svg";
 import 'animate.css';
 import "./Welcome.scss";
