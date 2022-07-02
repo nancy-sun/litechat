@@ -37,7 +37,7 @@ function ChatRoom() {
         // console.log(user);
         if (user.userID && user.username) {
             // console.log("In post user condition");
-            axios.post(`${process.env.REACT_APP_ROOM_URL}/${room}/${user.userID}`, user).then((response) => {
+            axios.post(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, user).then((response) => {
                 // console.log("in post new user")
                 // console.log(response)
                 return;

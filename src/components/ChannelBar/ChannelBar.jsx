@@ -3,13 +3,14 @@ import ChannelUser from "../ChannelUser/ChannelUser";
 import "./ChannelBar.scss";
 import Peer from "simple-peer";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import axios from "axios";
 
 
 
 function ChannelBar({ username, userID, room, socket, users }) {
 
     const [clicked, setClicked] = useState(false);
-    // const [voiceEnter, setVoiceEnter] = useState(false);
+    const [voiceEnter, setVoiceEnter] = useState(false);
 
     const userAudio = useRef();
     const [peers, setPeers] = useState([]);
@@ -17,12 +18,20 @@ function ChannelBar({ username, userID, room, socket, users }) {
     const peersRef = useRef([]);
 
 
+    const newVoiceUser = () => {
+        axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { username: username, userID: userID })
+            .then((response) => {
+                console.log(response.data)
+            }).catch(e => console.log(e));
+    }
+
     const enterVoice = () => {
-        // if (voiceEnter === true) return;
-        // setVoiceEnter(true);
+        if (voiceEnter === true) return;
+        setVoiceEnter(true);
+        newVoiceUser();
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
-                // setVoiceEnter(true);
+                setVoiceEnter(true);
                 userAudio.current.srcObject = stream;
                 socketRef.current.emit("joinVoice", room);
                 socketRef.current.on("allUsers", (users) => {
