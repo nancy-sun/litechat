@@ -37,9 +37,9 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 socketRef.current.on("allUsers", (users) => {
                     let peers = [];
                     users.forEach((user) => {
-                        const peer = createPeer(user, socketRef.current.id, stream);
+                        const peer = createPeer(user.userID, socketRef.current.id, stream);
                         peersRef.current.push({
-                            peerID: user,
+                            peerID: user.userID,
                             peer,
                         })
                         peers.push(peer);
