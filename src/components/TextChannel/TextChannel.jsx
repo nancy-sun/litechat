@@ -56,6 +56,7 @@ function TextChannel({ userID, username, socket, room }) {
         await emitMsg(msg);
         setMessageHistory([...messageHistory, msg]);
         postMsg(msg);
+        e.target.reset();
     }
 
     const receiveMsg = () => {
@@ -96,7 +97,7 @@ function TextChannel({ userID, username, socket, room }) {
             </div>
             <form onSubmit={sendMsg} className="text__input">
                 <label htmlFor="content">
-                    <input name="content" className="text__input--box" />
+                    <input name="content" className="text__input--box" autocomplete="off" />
                 </label>
             </form>
         </div >
