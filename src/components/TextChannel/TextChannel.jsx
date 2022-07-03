@@ -97,7 +97,7 @@ function TextChannel({ userID, username, socket, room }) {
             </div>
             <form onSubmit={sendMsg} className="text__input">
                 <label htmlFor="content">
-                    <input name="content" className="text__input--box" autocomplete="off" />
+                    <input name="content" className="text__input--box" autoComplete="off" />
                 </label>
             </form>
         </div >
