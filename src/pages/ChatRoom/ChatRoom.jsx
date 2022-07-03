@@ -75,6 +75,12 @@ function ChatRoom() {
         return () => window.removeEventListener("beforeunload", unloadCallback);
     }, []);
 
+    useEffect(() => {
+        return () => {
+            socket.disconnect();
+        }
+    }, [])
+
 
     return (
         <main className="room">
