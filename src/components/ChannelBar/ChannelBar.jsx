@@ -39,28 +39,36 @@ function ChannelBar({ username, userID, room, socket, users }) {
                     let peers = [];
                     users.forEach((user) => {
                         const peer = createPeer(user.userID, socketRef.current.id, stream);
-                        peersRef.current.push({
-                            peerID: user.userID,
-                            peer,
-                        })
-                        peers.push(peer);
+                        peersRef.current.push({ peerID: user.userID, peer });
+                        peers.push({ peerID: user.userID, peer });
                     })
                     setPeers(peers);
                 })
 
                 socketRef.current.on("voiceJoined", (payload) => {
                     const peer = addPeer(payload.signal, payload.caller, stream);
-                    peersRef.current.push({
+                    peersRef.current.push({ peerID: payload.caller, peer })
+                    const peerObj = {
                         peerID: payload.caller,
-                        peer,
-                    })
-                    setPeers((users) => [...users, peer]);
+                        peer
+                    }
+                    setPeers((users) => [...users, peerObj]);
                 });
 
                 socketRef.current.on("receiveSgn", (payload) => {
                     const sgn = peersRef.current.find((peer) => peer.peerID === payload.id);
                     sgn.peer.signal(payload.signal);
                 });
+
+                socketRef.current.on("disc", (userID) => {
+                    const peerObj = peersRef.current.find(peer => peer.peerID === userID);
+                    if (peerObj) {
+                        peerObj.peer.destroy();
+                    }
+                    const peers = peersRef.current.filter(peer => peer.peerID !== userID);
+                    peersRef.current = peers;
+                    setPeers(peers);
+                })
             })
     }
 
@@ -110,7 +118,6 @@ function ChannelBar({ username, userID, room, socket, users }) {
             }, 1000);
         });
     }
-    console.log(peersRef)
 
     return (
         <div className="channel">
@@ -152,7 +159,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 </div>
             }
             <div className="channel__users">
-                {peersRef.current.map((peer) => {
+                {peers.map((peer) => {
                     return (
                         <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} room={room} />
                     )
