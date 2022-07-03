@@ -3,6 +3,14 @@
 
 
 .box {
+    &__join {
+        margin: auto;
+        margin-top: 23vh;
+
+        @include tablet {
+            margin-top: 18vh;
+        }
+    }
 
     &__label {
         display: flex;
@@ -61,14 +69,6 @@
 
         @include tablet {
             transform: none;
-        }
-    }
-
-    &__text {
-        font-size: 0.7rem;
-
-        @include tablet {
-            display: block;
         }
     }
 }

@@ -37,7 +37,7 @@ function ChatRoom() {
         if (user.userID && user.username) {
             // console.log("In post user condition");
             axios.post(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, user).then((response) => {
-                // console.log(response)
+                // console.log("in post new user")
                 return;
             }).catch(e => console.log(e))
         }
@@ -49,8 +49,7 @@ function ChatRoom() {
     const getAllUsers = () => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`)
             .then(response => {
-                let users = response.data.users
-                setUsers(users);
+                setUsers(response.data.users);
             }).catch(e => console.log(e));
     }
 
@@ -74,8 +73,6 @@ function ChatRoom() {
         window.addEventListener("beforeunload", unloadCallback);
         return () => window.removeEventListener("beforeunload", unloadCallback);
     }, []);
-
-
 
     return (
         <main className="room">

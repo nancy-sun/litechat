@@ -4,19 +4,8 @@ import axios from "axios";
 import "./ChannelUser.scss";
 
 
-function ChannelUser({ peer, peerID, room }) {
-    const [username, setUsername] = useState("");
 
-    const getUserName = () => {
-        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then((response) => {
-            const users = response.data.voiceUsers;
-            for (let user of users) {
-                if (user.userID === peerID) {
-                    setUsername(user.username);
-                }
-            }
-        }).catch(e => console.log(e));
-    }
+function ChannelUser({ peer }) {
 
     const ref = useRef();
 

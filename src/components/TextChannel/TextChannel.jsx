@@ -1,5 +1,5 @@
 import ChatMessage from "../ChatMessage/ChatMessage";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { v4 as uuid } from 'uuid';
 import questionIcon from "../../assets/question.svg";
@@ -14,8 +14,6 @@ function TextChannel({ userID, username, socket, room }) {
     const getMsgs = () => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(response => {
             const msgs = response.data.messageHistory;
-            console.log(msgs);
-
             setMessageHistory(msgs);
         }).catch(e => console.log(e));
     }
@@ -58,6 +56,7 @@ function TextChannel({ userID, username, socket, room }) {
         await emitMsg(msg);
         setMessageHistory([...messageHistory, msg]);
         postMsg(msg);
+        e.target.reset();
     }
 
     const receiveMsg = () => {
@@ -75,6 +74,15 @@ function TextChannel({ userID, username, socket, room }) {
         getMsgs();
     }, [])
 
+    const messagesEndRef = useRef();
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+    useEffect(() => {
+        scrollToBottom()
+    }, [messageHistory]);
+
     return (
         <div className="text">
             <div className="text__head">
@@ -85,10 +93,11 @@ function TextChannel({ userID, username, socket, room }) {
                 {messageHistory.map((msg) => {
                     return <ChatMessage key={msg.messageID} message={msg.message} user={msg.username} time={msg.time} />
                 })}
+                <div ref={messagesEndRef} />
             </div>
             <form onSubmit={sendMsg} className="text__input">
                 <label htmlFor="content">
-                    <input name="content" className="text__input--box" />
+                    <input name="content" className="text__input--box" autocomplete="off" />
                 </label>
             </form>
         </div >

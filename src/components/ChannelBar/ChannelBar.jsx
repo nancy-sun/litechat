@@ -8,10 +8,10 @@ import axios from "axios";
 
 
 
-
 function ChannelBar({ username, userID, room, socket, users }) {
 
     const [clicked, setClicked] = useState(false);
+    const [voiceEnter, setVoiceEnter] = useState(false);
 
     const userAudio = useRef();
     const [peers, setPeers] = useState([]);
@@ -19,21 +19,17 @@ function ChannelBar({ username, userID, room, socket, users }) {
     const peersRef = useRef([]);
     const [voiceEntered, setVoiceEntered] = useState(false);
 
-    // const newVoiceUser = () => {
 
-    // }
+
+    const newVoiceUser = () => {
+        axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { username: username, userID: userID })
+            .then((response) => {
+                return;
+            }).catch(e => console.log(e));
+    }
 
     const enterVoice = () => {
-        setVoiceEntered(true);
-        if (voiceEntered === true) {
-            return;
-        }
-
-        // newVoiceUser();
-        axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { userID: userID, username: username }).then((response) => {
-            // return;
-            console.log(response)
-        }).catch(e => console.log(e))
+        newVoiceUser();
 
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
@@ -42,9 +38,9 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 socketRef.current.on("allUsers", (users) => {
                     let peers = [];
                     users.forEach((user) => {
-                        const peer = createPeer(user, socketRef.current.id, stream);
+                        const peer = createPeer(user.userID, socketRef.current.id, stream);
                         peersRef.current.push({
-                            peerID: user,
+                            peerID: user.userID,
                             peer,
                         })
                         peers.push(peer);
@@ -177,12 +173,12 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 {/* <audio ref={userAudio} muted autoPlay /> */}
 
             </div>
-            <div className="channel__self">
+            {/* <div className="channel__self">
                 self
                 <button>mic</button>
                 <button>sound</button>
-                {/* (tbd)sound settings */}
-            </div>
+                (tbd)sound settings
+            </div> */}
         </div>
     )
 }

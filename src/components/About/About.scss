@@ -15,16 +15,16 @@
     }
 
     &__overlay {
-        background-color: $secondary-light;
-        height: 10rem;
+        background-color: $secondary-color;
+        height: 11rem;
         width: 14rem;
         margin-top: 0.5rem;
-        overflow: hidden;
+        // overflow: hidden;
         display: flex;
         border-radius: 15px;
         flex-direction: column;
         position: fixed;
-        box-shadow: -3px 3px $primary-light;
+        box-shadow: -2px 2px $primary-light;
         box-sizing: border-box;
         padding: 1rem;
         justify-content: space-between;
@@ -35,7 +35,10 @@
     }
 
     &__text {
-        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35em;
+        font-size: 0.8rem;
     }
 
     &__body {
@@ -46,6 +49,7 @@
     }
 
     &__contact {
+        padding-top: 0.1rem;
         display: flex;
         justify-content: space-around;
     }

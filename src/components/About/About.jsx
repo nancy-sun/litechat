@@ -1,6 +1,5 @@
 import React from 'react';
-import { OverlayTrigger, Tooltip, Popover } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import "./About.scss";
 
 
@@ -10,9 +9,14 @@ function About() {
         <Popover id="popover-basic" className="about__overlay">
             <Popover.Header as="h3" className="about__title">Welcome to LiteChat~</Popover.Header>
             <Popover.Body className='about__body'>
-                <p className="about__text">
-                    know more or send a feedback at:
-                </p>
+                <div className="about__text">
+                    <p>
+                        This is a fullstack project built with React & Node.js. 🫡
+                    </p>
+                    <p>
+                        Know more or feedback at:
+                    </p>
+                </div>
                 <div className="about__contact">
                     <a href="https://github.com/nancy-sun" target="_blank" className="about__github"></a>
                     <a href="https://www.linkedin.com/in/-nancy-sun/" target="_blank" className="about__linkedin"></a>

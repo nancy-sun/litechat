@@ -1,10 +1,8 @@
 import { io } from "socket.io-client";
-import { useState } from "react";
 import axios from "axios";
-import { SERVER_URL, ROOM_URL } from "../../utils/APIUtils";
 import { v4 as uuid } from 'uuid';
-import { Link } from "react-router-dom";
 import pointIcon from "../../assets/pointFinger.svg";
+import About from "../../components/About/About";
 import 'animate.css';
 import "./Welcome.scss";
 
@@ -17,16 +15,16 @@ function Welcome() {
             roomID: uuid()
         }).then(response => {
             const room = response.data.roomID;
-            console.log(response);
-            socket.emit("join", room, (data) => {
-                console.log("user", data) //user id
-            });
+
             window.location.replace(`/room/${room}`);
         }).catch(e => console.log(e));
     };
 
     return (
         <main className="main">
+            <div className="main__about">
+                <About />
+            </div>
             <div className="box">
                 <div className="box__titles">
                     <h1 className="box__title">Welcome to lite chat</h1>
