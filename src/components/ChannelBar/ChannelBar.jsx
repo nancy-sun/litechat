@@ -4,6 +4,7 @@ import "./ChannelBar.scss";
 import Peer from "simple-peer";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import axios from "axios";
+import soundOnIcon from "../../assets/soundon.svg";
 
 
 
@@ -109,6 +110,7 @@ function ChannelBar({ username, userID, room, socket, users }) {
             }, 1000);
         });
     }
+    console.log(peersRef)
 
     return (
         <div className="channel">
@@ -139,13 +141,22 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 }
             </div>
             <button className="channel__voice" onClick={enterVoice}> voice</button>
+            {voiceEnter &&
+                <div className="user">
+                    <audio ref={userAudio} muted autoPlay />
+                    <div className="user__avatar"></div>
+                    <p className="user__name">{username}</p>
+                    <button className="user__status">
+                        <img className="user__status--icon" src={soundOnIcon} alt="sound" />
+                    </button>
+                </div>
+            }
             <div className="channel__users">
-                {peers.map((peer, i) => {
+                {peersRef.current.map((peer) => {
                     return (
-                        <ChannelUser key={i} peer={peer} />
+                        <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} room={room} />
                     )
                 })}
-                <audio ref={userAudio} muted autoPlay />
             </div>
             {/* <div className="channel__self">
                 self
