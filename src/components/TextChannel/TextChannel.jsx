@@ -2,7 +2,6 @@ import ChatMessage from "../ChatMessage/ChatMessage";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { v4 as uuid } from 'uuid';
-import questionIcon from "../../assets/question.svg";
 import About from "../About/About";
 import "./TextChannel.scss"
 
@@ -96,7 +95,7 @@ function TextChannel({ userID, username, socket, room }) {
             </div>
             <form onSubmit={sendMsg} className="text__input">
                 <label htmlFor="content">
-                    <input name="content" className="text__input--box" autocomplete="off" />
+                    <input name="content" className="text__input--box" autoComplete="off" />
                 </label>
             </form>
         </div >

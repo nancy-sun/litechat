@@ -74,6 +74,12 @@ function ChatRoom() {
         return () => window.removeEventListener("beforeunload", unloadCallback);
     }, []);
 
+    useEffect(() => {
+        return () => {
+            socket.disconnect();
+        }
+    }, [])
+
     return (
         <main className="room">
             <ChannelBar username={user.username} userID={user.userID} room={room} socket={socket} users={users} />

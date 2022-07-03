@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import ChannelUser from "../ChannelUser/ChannelUser";
 import "./ChannelBar.scss";
 import Peer from "simple-peer";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import soundOnIcon from "../../assets/soundon.svg";
 import axios from "axios";
+import soundOnIcon from "../../assets/soundon.svg";
 
 
 
@@ -39,42 +39,38 @@ function ChannelBar({ username, userID, room, socket, users }) {
                     let peers = [];
                     users.forEach((user) => {
                         const peer = createPeer(user.userID, socketRef.current.id, stream);
-                        peersRef.current.push({
-                            peerID: user.userID,
-                            peer,
-                        })
-                        peers.push(peer);
+                        peersRef.current.push({ peerID: user.userID, peer });
+                        peers.push({ peerID: user.userID, peer });
                     })
                     setPeers(peers);
                 })
 
                 socketRef.current.on("voiceJoined", (payload) => {
                     const peer = addPeer(payload.signal, payload.caller, stream);
-                    peersRef.current.push({
+                    peersRef.current.push({ peerID: payload.caller, peer })
+                    const peerObj = {
                         peerID: payload.caller,
-                        peer,
-                    })
-                    setPeers((users) => [...users, peer]);
+                        peer
+                    }
+                    setPeers((users) => [...users, peerObj]);
                 });
 
                 socketRef.current.on("receiveSgn", (payload) => {
                     const sgn = peersRef.current.find((peer) => peer.peerID === payload.id);
                     sgn.peer.signal(payload.signal);
                 });
+
+                socketRef.current.on("disc", (userID) => {
+                    const peerObj = peersRef.current.find(peer => peer.peerID === userID);
+                    if (peerObj) {
+                        peerObj.peer.destroy();
+                    }
+                    const peers = peersRef.current.filter(peer => peer.peerID !== userID);
+                    peersRef.current = peers;
+                    setPeers(peers);
+                })
             })
     }
-
-    // const handleUserLeft = () => {
-    //     socketRef.current.on("disconnected", (userID) => {
-    //         axios.delete(`${process.env.REACT_APP_ROOM_URL}/${room}/${userID}`).then((response) => {
-    //             console.log(response)
-    //         }).catch(e => console.log(e))
-    //     })
-    // }
-
-    // useEffect(() => {
-    //     handleUserLeft();
-    // }, []);
 
     const createPeer = (userToSignal, caller, stream) => {
         const peer = new Peer({
@@ -152,13 +148,22 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 }
             </div>
             <button className="channel__voice" onClick={enterVoice}> voice</button>
+            {voiceEnter &&
+                <div className="user">
+                    <audio ref={userAudio} muted autoPlay />
+                    <div className="user__avatar"></div>
+                    <p className="user__name">{username}</p>
+                    <button className="user__status">
+                        <img className="user__status--icon" src={soundOnIcon} alt="sound" />
+                    </button>
+                </div>
+            }
             <div className="channel__users">
-                {peers.map((peer, i) => {
+                {peers.map((peer) => {
                     return (
-                        <ChannelUser key={i} peer={peer} />
+                        <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} room={room} />
                     )
                 })}
-                <audio ref={userAudio} muted autoPlay />
             </div>
             {/* <div className="channel__self">
                 self
