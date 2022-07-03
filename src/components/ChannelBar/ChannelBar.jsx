@@ -17,8 +17,6 @@ function ChannelBar({ username, userID, room, socket, users }) {
     const [peers, setPeers] = useState([]);
     const socketRef = useRef(socket);
     const peersRef = useRef([]);
-    const [voiceEntered, setVoiceEntered] = useState(false);
-
 
 
     const newVoiceUser = () => {
@@ -29,10 +27,12 @@ function ChannelBar({ username, userID, room, socket, users }) {
     }
 
     const enterVoice = () => {
+        if (voiceEnter === true) return;
+        setVoiceEnter(true);
         newVoiceUser();
-
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
+                setVoiceEnter(true);
                 userAudio.current.srcObject = stream;
                 socketRef.current.emit("joinVoice", room);
                 socketRef.current.on("allUsers", (users) => {
@@ -64,17 +64,17 @@ function ChannelBar({ username, userID, room, socket, users }) {
             })
     }
 
-    const handleUserLeft = () => {
-        socketRef.current.on("disconnected", (userID) => {
-            axios.delete(`${process.env.REACT_APP_ROOM_URL}/${room}/${userID}`).then((response) => {
-                console.log(response)
-            }).catch(e => console.log(e))
-        })
-    }
+    // const handleUserLeft = () => {
+    //     socketRef.current.on("disconnected", (userID) => {
+    //         axios.delete(`${process.env.REACT_APP_ROOM_URL}/${room}/${userID}`).then((response) => {
+    //             console.log(response)
+    //         }).catch(e => console.log(e))
+    //     })
+    // }
 
-    useEffect(() => {
-        handleUserLeft();
-    }, []);
+    // useEffect(() => {
+    //     handleUserLeft();
+    // }, []);
 
     const createPeer = (userToSignal, caller, stream) => {
         const peer = new Peer({
@@ -123,8 +123,6 @@ function ChannelBar({ username, userID, room, socket, users }) {
         });
     }
 
-
-
     return (
         <div className="channel">
             <div className="channel__head">
@@ -154,24 +152,13 @@ function ChannelBar({ username, userID, room, socket, users }) {
                 }
             </div>
             <button className="channel__voice" onClick={enterVoice}> voice</button>
-            {voiceEntered &&
-                <div className="user">
-                    <audio ref={userAudio} muted autoPlay />
-                    <div className="user__avatar"></div>
-                    <p className="user__name">{username}</p>
-                    <button className="user__status">
-                        <img className="user__status--icon" src={soundOnIcon} alt="sound" />
-                    </button>
-                </div>
-            }
             <div className="channel__users">
-                {peersRef.current.map((peerRef, i) => {
+                {peers.map((peer, i) => {
                     return (
-                        <ChannelUser key={i} peer={peerRef.peer} peerID={peerRef.peerID} room={room} />
+                        <ChannelUser key={i} peer={peer} />
                     )
                 })}
-                {/* <audio ref={userAudio} muted autoPlay /> */}
-
+                <audio ref={userAudio} muted autoPlay />
             </div>
             {/* <div className="channel__self">
                 self

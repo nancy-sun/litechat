@@ -61,7 +61,6 @@ function TextChannel({ userID, username, socket, room }) {
 
     const receiveMsg = () => {
         socket.on("receiveMsg", (data) => {
-            // console.log(data)
             setMessageHistory((messageHistory) => [...messageHistory, data]);
         })
     }

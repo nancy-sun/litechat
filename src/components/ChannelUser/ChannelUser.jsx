@@ -4,7 +4,6 @@ import axios from "axios";
 import "./ChannelUser.scss";
 
 
-
 function ChannelUser({ peer }) {
 
     const ref = useRef();
@@ -12,15 +11,14 @@ function ChannelUser({ peer }) {
     useEffect(() => {
         peer.on("stream", (stream) => {
             ref.current.srcObject = stream;
-        });
-        getUserName();
+        })
     }, []);
 
     return (
         <div className="user">
             <audio ref={ref} autoPlay />
             <div className="user__avatar"></div>
-            <p className="user__name">{username}</p>
+            <p className="user__name">username</p>
             <button className="user__status">
                 <img className="user__status--icon" src={soundOnIcon} alt="sound" />
             </button>
