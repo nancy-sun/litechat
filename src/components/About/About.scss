@@ -16,10 +16,10 @@
 
     &__overlay {
         background-color: $secondary-color;
-        height: 10rem;
+        height: 11rem;
         width: 14rem;
         margin-top: 0.5rem;
-        overflow: hidden;
+        // overflow: hidden;
         display: flex;
         border-radius: 15px;
         flex-direction: column;
