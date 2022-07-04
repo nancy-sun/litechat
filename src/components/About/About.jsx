@@ -11,10 +11,10 @@ function About() {
             <Popover.Body className='about__body'>
                 <div className="about__text">
                     <p>
-                        This is a fullstack project built with React & Node.js. 🫡
+                        This is Nancy. 🫡 I built this fullstack project with React & Node.js.
                     </p>
                     <p>
-                        Know more or feedback at:
+                        Know more or reach me at:
                     </p>
                 </div>
                 <div className="about__contact">
