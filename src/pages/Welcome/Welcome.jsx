@@ -1,6 +1,5 @@
 import { io } from "socket.io-client";
 import axios from "axios";
-import { v4 as uuid } from 'uuid';
 import pointIcon from "../../assets/pointFinger.svg";
 import About from "../../components/About/About";
 import 'animate.css';
@@ -11,11 +10,8 @@ const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 function Welcome() {
 
     const createRoom = () => {
-        axios.post(process.env.REACT_APP_ROOM_URL, {
-            roomID: uuid()
-        }).then(response => {
-            const room = response.data.roomID;
-
+        axios.post(process.env.REACT_APP_ROOM_URL).then(response => {
+            const room = response.data._id;
             window.location.replace(`/room/${room}`);
         }).catch(e => console.log(e));
     };

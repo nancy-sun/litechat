@@ -14,7 +14,7 @@ function EnterRoom() {
         }
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${event.target.room.value}`).then((response) => {
 
-            window.location.replace(`/room/${response.data.roomID}`);
+            window.location.replace(`/room/${response.data._id}`);
 
         }).catch(e => console.log(e))
     }

@@ -1,7 +1,6 @@
 import ChatMessage from "../ChatMessage/ChatMessage";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { v4 as uuid } from 'uuid';
 import About from "../About/About";
 import "./TextChannel.scss"
 
@@ -46,7 +45,6 @@ function TextChannel({ userID, username, socket, room }) {
         }
 
         let msg = {
-            messageID: uuid(),
             message: message,
             username: username,
             time: `${hour}:${minute}`
