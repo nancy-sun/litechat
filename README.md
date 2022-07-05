@@ -43,6 +43,8 @@ $ npm start
   
 ## Prototype  
 
+**Presentation Slides:** https://www.figma.com/file/mbzZFUtxbesXNTo0EptXWp/capstone-presentation
+
 **Design/prototype resources**
 * [UI](https://www.figma.com/community/file/818668544591341056)
 * [logo](https://www.figma.com/community/file/1088206555564423933)
