@@ -6,7 +6,6 @@ import 'animate.css';
 import "./Welcome.scss";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
-console.log(process.env.REACT_APP_SERVER_URL)
 
 
 function Welcome() {

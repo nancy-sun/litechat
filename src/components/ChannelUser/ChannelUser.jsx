@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import soundOnIcon from "../../assets/soundon.svg";
+import { getColorByName } from "../../utils/utils";
 import axios from "axios";
 import "./ChannelUser.scss";
 
@@ -8,6 +9,7 @@ function ChannelUser({ peer, peerID, room }) {
 
     const ref = useRef();
     const [username, setUsername] = useState("anonymous")
+    const [userColor, setUserColor] = useState("3dsfxc");
 
     const getUserName = (peerID) => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then((response) => {
@@ -27,10 +29,14 @@ function ChannelUser({ peer, peerID, room }) {
         })
     }, []);
 
+    useEffect(() => {
+        setUserColor(getColorByName(username));
+    }, [username])
+
     return (
         <div className="user">
             <audio ref={ref} autoPlay />
-            <div className="user__avatar"></div>
+            <div className="user__avatar" style={{ "backgroundColor": `#${userColor}` }}></div>
             <p className="user__name">{username}</p>
             <button className="user__status">
                 <img className="user__status--icon" src={soundOnIcon} alt="sound" />

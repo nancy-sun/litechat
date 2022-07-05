@@ -44,18 +44,8 @@ function ChatRoom() {
     }
 
 
-    const [users, setUsers] = useState([])
-
-    const getAllUsers = () => {
-        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`)
-            .then(response => {
-                setUsers(response.data.users);
-            }).catch(e => console.log(e));
-    }
-
     useEffect(() => {
         emitJoin();
-        getAllUsers();
     }, [])
 
     useEffect(() => {
@@ -82,7 +72,7 @@ function ChatRoom() {
 
     return (
         <main className="room">
-            <ChannelBar username={user.username} userID={user.userID} room={room} socket={socket} users={users} />
+            <ChannelBar username={user.username} userID={user.userID} room={room} socket={socket} />
             <TextChannel userID={user.userID} username={user.username} socket={socket} room={room} />
         </main>
     )

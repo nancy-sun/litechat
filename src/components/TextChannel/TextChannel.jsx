@@ -2,6 +2,7 @@ import ChatMessage from "../ChatMessage/ChatMessage";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import About from "../About/About";
+import UserBanner from "../UserBanner/UserBanner";
 import "./TextChannel.scss"
 
 
