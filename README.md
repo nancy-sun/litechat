@@ -22,6 +22,17 @@ Start running:
 ```
 $ npm start
 ```
+  
+
+**Environment variable example for `.env` file:**  
+
+- poke api to generate random user names:
+```REACT_APP_POKE_API = https://pokeapi.co/api/v2/pokemon```  
+- `REACT_APP_ROOM_URL` is the server url of the application
+- `REACT_APP_SERVER_URL` is the server url with route `/room`  
+
+*Note that when running locally, the server url should be* `http://localhost:PORT`  
+
 
 ## Tools/Methods  
 
