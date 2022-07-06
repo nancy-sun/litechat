@@ -30,7 +30,7 @@
 
     &__input {
         border: none;
-        background-color: $secondary-light;
+        background-color: $primary-lighter;
         border-radius: 5px;
         background-image: url("../../assets/enter.svg");
         background-repeat: no-repeat;
@@ -42,6 +42,12 @@
 
         &:focus {
             outline: $secondary-color 2px solid;
+        }
+
+        &--invalid {
+            animation: headShake;
+            animation-duration: 1.5s;
+            outline: $secondary-color 2.5px solid;
         }
     }
 }

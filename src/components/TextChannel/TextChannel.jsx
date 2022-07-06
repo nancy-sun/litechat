@@ -28,10 +28,11 @@ function TextChannel({ userID, username, socket, room }) {
     }
 
     const sendMsg = async (e) => {
+        e.target.content.classList.remove("text__input--invalid");
         e.preventDefault();
         let message = e.target.content.value;
-        if (!message) {
-            alert("no message text");
+        if (!message || message.trim() === "") {
+            e.target.content.classList.add("text__input--invalid");
             return;
         }
 
