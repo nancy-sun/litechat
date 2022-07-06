@@ -13,6 +13,16 @@ const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 function ChatRoom() {
     let room = useParams().id;
 
+    const checkParam = () => {
+        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(() => {
+            return;
+        }).catch((e) => {
+            window.location.replace("/404");
+        })
+    }
+
+    checkParam();
+
     const [user, setUser] = useState({ userID: "", username: "" });
 
     const emitJoin = () => {
@@ -59,7 +69,6 @@ function ChatRoom() {
             event.returnValue = "";
             return "";
         };
-
         window.addEventListener("beforeunload", unloadCallback);
         return () => window.removeEventListener("beforeunload", unloadCallback);
     }, []);
