@@ -67,4 +67,4 @@ $ npm start
   
 ## Future discussion
 * Potential improvements: code refactoring, implement self-built STUN server, register for a TURN server, etc.  
-* More features(TBD): video chat, screen sharing, send images in text channel, login Auth to save a room, etc.
+* More features(TBD): sound/voice configuring, video chat, screen sharing, send images in text channel, login Auth to save a room, etc.
