@@ -7,7 +7,7 @@ Server repo: https://github.com/nancy-sun/litechat-server
   
 ## Description
 Lite Chat is an anonymous n-to-n chat application for text and voice chat, where users could create a temporary chatroom or join an existing chatroom. Type in the message input box to sent text messages to the room, enter the voice channel on left side bar to start talking. Works in web browsers without any additional downloads or plugins.  
-User's text messages are sent through websocket connection, and voices are sent through peer to peer UDP connection. 
+User's text messages are sent through websocket TCP connection, and voices are sent through peer to peer UDP connection. 
 
 ## Installation  
 Clone source code locally:
