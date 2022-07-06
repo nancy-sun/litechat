@@ -24,6 +24,10 @@
             box-sizing: border-box;
             overflow: hidden;
         }
+
+        &--self {
+            font-weight: 800;
+        }
     }
 
     &__status {

@@ -1,14 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ChannelUser from "../ChannelUser/ChannelUser";
-import "./ChannelBar.scss";
 import Peer from "simple-peer";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import axios from "axios";
 import soundOnIcon from "../../assets/soundon.svg";
+import { getColorByName } from "../../utils/utils";
+import "./ChannelBar.scss";
 
 
 
-function ChannelBar({ username, userID, room, socket, users }) {
+function ChannelBar({ username, userID, room, socket }) {
 
     const [clicked, setClicked] = useState(false);
     const [voiceEnter, setVoiceEnter] = useState(false);
@@ -119,6 +120,12 @@ function ChannelBar({ username, userID, room, socket, users }) {
         });
     }
 
+    const [userColor, setUserColor] = useState("000");
+
+    useEffect(() => {
+        setUserColor(getColorByName(username));
+    }, [username])
+
     return (
         <div className="channel">
             <div className="channel__head">
@@ -151,8 +158,8 @@ function ChannelBar({ username, userID, room, socket, users }) {
             {voiceEnter &&
                 <div className="user">
                     <audio ref={userAudio} muted autoPlay />
-                    <div className="user__avatar"></div>
-                    <p className="user__name">{username}</p>
+                    <div className="user__avatar" style={{ "backgroundColor": `#${userColor}` }}></div>
+                    <p className="user__name user__name--self">{username}</p>
                     <button className="user__status">
                         <img className="user__status--icon" src={soundOnIcon} alt="sound" />
                     </button>

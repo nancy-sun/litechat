@@ -1,8 +1,8 @@
 import ChatMessage from "../ChatMessage/ChatMessage";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { v4 as uuid } from 'uuid';
 import About from "../About/About";
+import UserBanner from "../UserBanner/UserBanner";
 import "./TextChannel.scss"
 
 
@@ -28,10 +28,11 @@ function TextChannel({ userID, username, socket, room }) {
     }
 
     const sendMsg = async (e) => {
+        e.target.content.classList.remove("text__input--invalid");
         e.preventDefault();
         let message = e.target.content.value;
-        if (!message) {
-            alert("no message text");
+        if (!message || message.trim() === "") {
+            e.target.content.classList.add("text__input--invalid");
             return;
         }
 
@@ -46,7 +47,6 @@ function TextChannel({ userID, username, socket, room }) {
         }
 
         let msg = {
-            messageID: uuid(),
             message: message,
             username: username,
             time: `${hour}:${minute}`
@@ -81,6 +81,20 @@ function TextChannel({ userID, username, socket, room }) {
         scrollToBottom()
     }, [messageHistory]);
 
+    const newJoin = () => {
+        socket.on("newJoin", (data) => {
+            let msg = {
+                status: "join",
+                user: data
+            }
+            setMessageHistory((messageHistory) => [...messageHistory, msg]);
+        })
+    }
+
+    useEffect(() => {
+        newJoin();
+    }, [socket])
+
     return (
         <div className="text">
             <div className="text__head">
@@ -89,7 +103,11 @@ function TextChannel({ userID, username, socket, room }) {
             </div>
             <div className="text__messages">
                 {messageHistory.map((msg) => {
-                    return <ChatMessage key={msg.messageID} message={msg.message} user={msg.username} time={msg.time} />
+                    if ("status" in msg) {
+                        return <UserBanner key={msg.user} user={msg.user} status={msg.status} room={room} />
+                    } else {
+                        return <ChatMessage key={msg.messageID} message={msg.message} user={msg.username} time={msg.time} />
+                    }
                 })}
                 <div ref={messagesEndRef} />
             </div>

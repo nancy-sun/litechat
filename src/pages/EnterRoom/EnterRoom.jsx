@@ -7,16 +7,18 @@ import "./EnterRoom.scss";
 
 function EnterRoom() {
     const joinRoom = (event) => {
+        event.target.room.classList.remove("box__input--invalid");
         event.preventDefault();
-        if (!event.target.room.value) {
-            alert("please enter a room number");
+        if (!event.target.room.value || event.target.room.value.trim() === "") {
+            event.target.room.classList.add("box__input--invalid");
             return;
         }
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${event.target.room.value}`).then((response) => {
-
-            window.location.replace(`/room/${response.data.roomID}`);
-
-        }).catch(e => console.log(e))
+            window.location.replace(`/room/${response.data._id}`);
+        }).catch(e => {
+            event.target.room.classList.add("box__input--invalid");
+            return;
+        })
     }
 
     return (

@@ -13,6 +13,16 @@ const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 function ChatRoom() {
     let room = useParams().id;
 
+    const checkParam = () => {
+        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(() => {
+            return;
+        }).catch((e) => {
+            window.location.replace("/404");
+        })
+    }
+
+    checkParam();
+
     const [user, setUser] = useState({ userID: "", username: "" });
 
     const emitJoin = () => {
@@ -44,18 +54,8 @@ function ChatRoom() {
     }
 
 
-    const [users, setUsers] = useState([])
-
-    const getAllUsers = () => {
-        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`)
-            .then(response => {
-                setUsers(response.data.users);
-            }).catch(e => console.log(e));
-    }
-
     useEffect(() => {
         emitJoin();
-        getAllUsers();
     }, [])
 
     useEffect(() => {
@@ -69,7 +69,6 @@ function ChatRoom() {
             event.returnValue = "";
             return "";
         };
-
         window.addEventListener("beforeunload", unloadCallback);
         return () => window.removeEventListener("beforeunload", unloadCallback);
     }, []);
@@ -82,7 +81,7 @@ function ChatRoom() {
 
     return (
         <main className="room">
-            <ChannelBar username={user.username} userID={user.userID} room={room} socket={socket} users={users} />
+            <ChannelBar username={user.username} userID={user.userID} room={room} socket={socket} />
             <TextChannel userID={user.userID} username={user.username} socket={socket} room={room} />
         </main>
     )

@@ -58,6 +58,12 @@
                 outline: $secondary-color 2px solid;
             }
         }
+
+        &--invalid {
+            animation: headShake;
+            animation-duration: 1.5s;
+            outline: $secondary-color 2.5px solid;
+        }
     }
 
 }
