@@ -7,6 +7,7 @@ import soundOffIcon from "../../assets/soundoff.svg";
 import { getColorByName } from "../../utils/utils";
 import "./ChannelBar.scss";
 import ChannelBarHead from "../ChannelBarHead/ChannelBarHead";
+import Control from "../Control/Control";
 
 
 function ChannelBar({ username, userID, room, socket }) {
@@ -165,6 +166,7 @@ function ChannelBar({ username, userID, room, socket }) {
                     )
                 })}
             </div>
+            <Control toggleVoice={toggleVoice} selfVoice={selfVoice} />
         </div>
     )
 }

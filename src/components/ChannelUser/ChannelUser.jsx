@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import soundOnIcon from "../../assets/soundon.svg";
 import { getColorByName } from "../../utils/utils";
 import axios from "axios";
 import "./ChannelUser.scss";
@@ -39,7 +38,6 @@ function ChannelUser({ peer, peerID, room }) {
             <div className="user__avatar" style={{ "backgroundColor": `#${userColor}` }}></div>
             <p className="user__name">{username}</p>
             <button className="user__status">
-                <img className="user__status--icon" src={soundOnIcon} alt="sound" />
             </button>
         </div>
     )
