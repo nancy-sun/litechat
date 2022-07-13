@@ -53,7 +53,6 @@ function ChatRoom() {
         }
     }
 
-
     useEffect(() => {
         emitJoin();
     }, [])
@@ -61,7 +60,6 @@ function ChatRoom() {
     useEffect(() => {
         postNewUser();
     }, [user])
-
 
     useEffect(() => {
         const unloadCallback = (event) => {
