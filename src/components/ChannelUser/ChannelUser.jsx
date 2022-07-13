@@ -34,7 +34,7 @@ function ChannelUser({ peer, peerID, room }) {
 
     return (
         <div className="user">
-            <audio ref={ref} autoPlay />
+            <audio ref={ref} autoPlay className="user__audio" />
             <div className="user__avatar" style={{ "backgroundColor": `#${userColor}` }}></div>
             <p className="user__name">{username}</p>
             <button className="user__status">

@@ -36,6 +36,11 @@
 
         &--icon {
             height: 0.8rem;
+            display: none;
+
+            @include tablet {
+                display: inline-block;
+            }
         }
     }
 }

@@ -47,6 +47,10 @@
     &__headset {
         @extend .control__mic;
         background-image: url("../../assets/headset.svg");
-    }
 
+        &--off {
+            @extend .control__mic--off;
+            background-image: url("../../assets/headsetOff.svg");
+        }
+    }
 }
