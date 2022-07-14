@@ -160,11 +160,11 @@ function ChannelBar({ username, userID, room, socket }) {
                 </div>
             }
             <div className="channel__users">
-                {peers.map((peer) => {
+                {Array.from(new Set(peers.map((peer) => {
                     return (
                         <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} room={room} />
                     )
-                })}
+                })))}
             </div>
             <Control toggleVoice={toggleVoice} selfVoice={selfVoice} />
         </div>
