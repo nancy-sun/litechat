@@ -21,7 +21,7 @@ function UserBanner({ user, status, room }) {
     useEffect(() => {
         setTimeout(() => {
             getUserName(user);
-        }, 400);
+        }, 500);
     }, [])
 
     return (
