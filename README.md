@@ -65,6 +65,7 @@ $ npm start
   
 ![prototype](https://user-images.githubusercontent.com/99620863/177220923-e7ba5244-c4c8-4ee5-99c9-a992e0fc1a87.svg)
   
-## Future discussion
-* Potential improvements: code refactoring, implement self-built STUN server, register for a TURN server, etc.  
-* More features(TBD): sound/voice configuring, video chat, screen sharing, send images in text channel, login Auth to save a room, etc.
+## New Features
+- [x] sound/voice configuring
+- [ ] video chat
+- [ ] optional login to save a room
