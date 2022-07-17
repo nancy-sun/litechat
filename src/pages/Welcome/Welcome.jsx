@@ -1,9 +1,9 @@
-import { io } from "socket.io-client";
 import axios from "axios";
 import pointIcon from "../../assets/pointFinger.svg";
 import About from "../../components/About/About";
 import 'animate.css';
 import "./Welcome.scss";
+
 
 
 function Welcome() {

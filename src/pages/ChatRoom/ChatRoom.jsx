@@ -7,11 +7,22 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./ChatRoom.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { join } from "../../reducers/user";
+import { setRoom } from "../../reducers/room";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 function ChatRoom() {
-    let room = useParams().id;
+    const dispatch = useDispatch();
+    let roomID = useParams().id;
+
+
+    useEffect(() => {
+        dispatch(setRoom(roomID));
+    }, []);
+
+    const room = useSelector((state) => state.room.value);
 
     const checkParam = () => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(() => {
@@ -23,7 +34,7 @@ function ChatRoom() {
 
     checkParam();
 
-    const [user, setUser] = useState({ userID: "", username: "" });
+    const user = useSelector((state) => state.user.value);
 
     const emitJoin = () => {
         socket.emit("join", room, (data) => {
@@ -39,7 +50,7 @@ function ChatRoom() {
         const randomNum = Math.floor(Math.random() * 897) + 1;
         axios.get(`${process.env.REACT_APP_POKE_API}/${randomNum}`).then((response) => {
             // console.log("in current user")
-            setUser({ userID: userID, username: response.data.name });
+            dispatch(join({ userID: userID, username: response.data.name }))
         }).catch(e => console.log(e))
     }
 
@@ -79,8 +90,8 @@ function ChatRoom() {
 
     return (
         <main className="room">
-            <ChannelBar username={user.username} userID={user.userID} room={room} socket={socket} />
-            <TextChannel userID={user.userID} username={user.username} socket={socket} room={room} />
+            <ChannelBar socket={socket} />
+            <TextChannel socket={socket} />
         </main>
     )
 }

@@ -8,9 +8,13 @@ import { getColorByName } from "../../utils/utils";
 import "./ChannelBar.scss";
 import ChannelBarHead from "../ChannelBarHead/ChannelBarHead";
 import Control from "../Control/Control";
+import { useSelector, useDispatch } from "react-redux";
+import { setColor } from "../../reducers/userColor";
 
+function ChannelBar({ socket }) {
 
-function ChannelBar({ username, userID, room, socket }) {
+    const user = useSelector((state) => state.user.value);
+    const room = useSelector((state) => state.room.value);
 
     const [voiceEnter, setVoiceEnter] = useState(false);
 
@@ -20,7 +24,7 @@ function ChannelBar({ username, userID, room, socket }) {
     const peersRef = useRef([]);
 
     const newVoiceUser = () => {
-        axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { username: username, userID: userID })
+        axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { username: user.username, userID: user.userID })
             .then((response) => {
                 return;
             }).catch(e => console.log(e));
@@ -113,11 +117,13 @@ function ChannelBar({ username, userID, room, socket }) {
         return peer;
     }
 
-    const [userColor, setUserColor] = useState("000");
+    const dispatch = useDispatch();
+    const userColor = useSelector((state) => state.avatar.value);
+
 
     useEffect(() => {
-        setUserColor(getColorByName(username));
-    }, [username])
+        dispatch(setColor(getColorByName(user.username)));
+    }, [user.username])
 
     const [selfVoice, setSelfVoice] = useState(true);
     const [voiceConfig, setVoiceConfig] = useState([]);
@@ -147,13 +153,13 @@ function ChannelBar({ username, userID, room, socket }) {
 
     return (
         <div className="channel">
-            <ChannelBarHead username={username} />
+            <ChannelBarHead />
             <button className="channel__voice" onClick={enterVoice}> voice</button>
             {voiceEnter &&
                 <div className="user">
                     <audio ref={userAudio} muted autoPlay />
                     <div className="user__avatar" style={{ "backgroundColor": `#${userColor}` }}></div>
-                    <p className="user__name user__name--self">{username}</p>
+                    <p className="user__name user__name--self">{user.username}</p>
                     <button className="user__status">
                         <img className="user__status--icon" src={selfVoice ? soundOnIcon : soundOffIcon} alt="sound" onClick={toggleVoice} />
                     </button>
@@ -162,7 +168,7 @@ function ChannelBar({ username, userID, room, socket }) {
             <div className="channel__users">
                 {Array.from(new Set(peers.map((peer) => {
                     return (
-                        <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} room={room} />
+                        <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} />
                     )
                 })))}
             </div>

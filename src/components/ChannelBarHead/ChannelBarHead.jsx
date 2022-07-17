@@ -1,8 +1,11 @@
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 
-function ChannelBarHead({ username }) {
+function ChannelBarHead() {
+    const user = useSelector((state) => state.user.value);
+
 
     const [clicked, setClicked] = useState(false);
 
@@ -17,7 +20,7 @@ function ChannelBarHead({ username }) {
 
     return (
         <div className="channel__head">
-            <p className="channel__welcome">👋 {username}</p>
+            <p className="channel__welcome">👋 {user.username}</p>
             {clicked ?
                 (<OverlayTrigger trigger="hover"
                     placement="bottom"
