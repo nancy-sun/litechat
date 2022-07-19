@@ -1,38 +1,21 @@
+import axios from "axios";
 import { io } from "socket.io-client";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ChannelBar from "../../components/ChannelBar/ChannelBar";
 import TextChannel from "../../components/TextChannel/TextChannel";
-import "./ChatRoom.scss";
-import { useEffect, useState } from "react";
-import React from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import "./ChatRoom.scss";
 import { useSelector, useDispatch } from "react-redux";
+import { validateRoom } from "../../utils/utils";
 import { join } from "../../reducers/user";
-import { setRoom } from "../../reducers/room";
+import "./ChatRoom.scss";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 function ChatRoom() {
+    let room = useParams().id;
     const dispatch = useDispatch();
-    let roomID = useParams().id;
 
-
-    useEffect(() => {
-        dispatch(setRoom(roomID));
-    }, []);
-
-    const room = useSelector((state) => state.room.value);
-
-    const checkParam = () => {
-        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(() => {
-            return;
-        }).catch((e) => {
-            window.location.replace("/404");
-        })
-    }
-
-    checkParam();
+    validateRoom(room);
 
     const user = useSelector((state) => state.user.value);
 

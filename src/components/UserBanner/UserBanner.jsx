@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./UserBanner.scss";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+
 
 
 function UserBanner({ user, status }) {
 
+    let room = useParams().id;
     const [username, setUsername] = useState();
-    const room = useSelector((state) => state.room.value);
+
 
     const getUserName = (id) => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then((response) => {

@@ -1,20 +1,22 @@
-import React, { useState, useRef, useEffect } from "react";
-import ChannelUser from "../ChannelUser/ChannelUser";
-import Peer from "simple-peer";
 import axios from "axios";
-import soundOnIcon from "../../assets/soundon.svg";
-import soundOffIcon from "../../assets/soundoff.svg";
-import { getColorByName } from "../../utils/utils";
-import "./ChannelBar.scss";
+import Peer from "simple-peer";
+import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import ChannelUser from "../ChannelUser/ChannelUser";
 import ChannelBarHead from "../ChannelBarHead/ChannelBarHead";
 import Control from "../Control/Control";
-import { useSelector, useDispatch } from "react-redux";
 import { setColor } from "../../reducers/userColor";
+import { getColorByName } from "../../utils/utils";
+import soundOnIcon from "../../assets/soundon.svg";
+import soundOffIcon from "../../assets/soundoff.svg";
+import "./ChannelBar.scss";
 
 function ChannelBar({ socket }) {
 
+    let room = useParams().id;
     const user = useSelector((state) => state.user.value);
-    const room = useSelector((state) => state.room.value);
+
 
     const [voiceEnter, setVoiceEnter] = useState(false);
 

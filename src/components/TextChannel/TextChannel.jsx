@@ -5,12 +5,14 @@ import About from "../About/About";
 import UserBanner from "../UserBanner/UserBanner";
 import "./TextChannel.scss"
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 
 function TextChannel({ socket }) {
+    let room = useParams().id;
     const [messageHistory, setMessageHistory] = useState([]);
     const user = useSelector((state) => state.user.value);
-    const room = useSelector((state) => state.room.value);
+
 
     const getMsgs = () => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(response => {
