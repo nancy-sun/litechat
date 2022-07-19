@@ -39,8 +39,9 @@ $ npm start
 **Tech Stack**
 * React
 * Sass
-* Node.js
+* Node.js / Express.js
 * MongoDB - Mongoose
+* Redux
 * figma (for prototype)
 
 **Resources/Tools/Methods**
@@ -51,6 +52,7 @@ $ npm start
 * [React Bootstrap](https://react-bootstrap.github.io/)
 * [animation.css](https://animate.style/)
 * [PokeAPI](https://pokeapi.co/)
+* [STUN & TRUN server](https://www.metered.ca/tools/openrelay/#overview)
   
 ## Prototype  
 

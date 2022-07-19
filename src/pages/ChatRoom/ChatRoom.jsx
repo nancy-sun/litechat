@@ -18,7 +18,6 @@ function ChatRoom() {
     validateRoom(room);
 
     const user = useSelector((state) => state.user.value);
-
     const emitJoin = () => {
         socket.emit("join", room, (data) => {
             // console.log("emit join")

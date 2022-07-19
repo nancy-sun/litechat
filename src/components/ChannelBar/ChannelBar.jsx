@@ -86,16 +86,18 @@ function ChannelBar({ socket }) {
             initiator: true,
             trickle: false,
             stream: stream,
-            // config: {
-            //     iceServers: [
-            //         {
-            //             urls:  //stun server
-            //         },
-            //         {
-            //             urls: //turn server
-            //         }
-            //     ]
-            // },
+            config: {
+                iceServers: [
+                    {
+                        urls: "stun:openrelay.metered.ca:80"
+                    },
+                    {
+                        urls: "turn:openrelay.metered.ca:80",
+                        username: "openrelayproject",
+                        credential: "openrelayproject",
+                    }
+                ]
+            },
         });
 
         peer.on("signal", (signal) => {
@@ -110,6 +112,18 @@ function ChannelBar({ socket }) {
             initiator: false,
             trickle: false,
             stream,
+            config: {
+                iceServers: [
+                    {
+                        urls: "stun:openrelay.metered.ca:80"
+                    },
+                    {
+                        urls: "turn:openrelay.metered.ca:80",
+                        username: "openrelayproject",
+                        credential: "openrelayproject",
+                    }
+                ]
+            },
         })
 
         peer.on("signal", (signal) => {
@@ -152,7 +166,6 @@ function ChannelBar({ socket }) {
         }
     }
 
-
     return (
         <div className="channel">
             <ChannelBarHead />
@@ -169,6 +182,7 @@ function ChannelBar({ socket }) {
             }
             <div className="channel__users">
                 {Array.from(new Set(peers.map((peer) => {
+                    console.log(peer)
                     return (
                         <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} />
                     )
