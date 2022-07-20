@@ -10,14 +10,13 @@ import { setColor } from "../../reducers/userColor";
 import { getColorByName } from "../../utils/utils";
 import soundOnIcon from "../../assets/soundon.svg";
 import soundOffIcon from "../../assets/soundoff.svg";
+import { ICE_SERVERS } from "../../utils/mediaUtils";
 import "./ChannelBar.scss";
 
 function ChannelBar({ socket }) {
 
     let room = useParams().id;
     const user = useSelector((state) => state.user.value);
-
-
     const [voiceEnter, setVoiceEnter] = useState(false);
 
     const userAudio = useRef();
@@ -86,18 +85,7 @@ function ChannelBar({ socket }) {
             initiator: true,
             trickle: false,
             stream: stream,
-            config: {
-                iceServers: [
-                    {
-                        urls: "stun:openrelay.metered.ca:80"
-                    },
-                    {
-                        urls: "turn:openrelay.metered.ca:80",
-                        username: "openrelayproject",
-                        credential: "openrelayproject",
-                    }
-                ]
-            },
+            config: { iceServers: ICE_SERVERS }
         });
 
         peer.on("signal", (signal) => {
@@ -112,18 +100,7 @@ function ChannelBar({ socket }) {
             initiator: false,
             trickle: false,
             stream,
-            config: {
-                iceServers: [
-                    {
-                        urls: "stun:openrelay.metered.ca:80"
-                    },
-                    {
-                        urls: "turn:openrelay.metered.ca:80",
-                        username: "openrelayproject",
-                        credential: "openrelayproject",
-                    }
-                ]
-            },
+            config: { iceServers: ICE_SERVERS }
         })
 
         peer.on("signal", (signal) => {

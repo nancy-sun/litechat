@@ -2,11 +2,8 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-
 function ChannelBarHead() {
     const user = useSelector((state) => state.user.value);
-
-
     const [clicked, setClicked] = useState(false);
 
     const copyLink = () => {
