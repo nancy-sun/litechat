@@ -4,11 +4,15 @@ import axios from "axios";
 import About from "../About/About";
 import UserBanner from "../UserBanner/UserBanner";
 import "./TextChannel.scss"
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 
-
-function TextChannel({ userID, username, socket, room }) {
+function TextChannel({ socket }) {
+    let room = useParams().id;
     const [messageHistory, setMessageHistory] = useState([]);
+    const user = useSelector((state) => state.user.value);
+
 
     const getMsgs = () => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(response => {
@@ -48,7 +52,7 @@ function TextChannel({ userID, username, socket, room }) {
 
         let msg = {
             message: message,
-            username: username,
+            username: user.username,
             time: `${hour}:${minute}`
         }
 
@@ -104,7 +108,7 @@ function TextChannel({ userID, username, socket, room }) {
             <div className="text__messages">
                 {messageHistory.map((msg) => {
                     if ("status" in msg) {
-                        return <UserBanner key={msg.user} user={msg.user} status={msg.status} room={room} />
+                        return <UserBanner key={msg.user} user={msg.user} status={msg.status} />
                     } else {
                         return <ChatMessage key={msg.messageID} message={msg.message} user={msg.username} time={msg.time} />
                     }

@@ -28,8 +28,15 @@ $ npm start
 
 - poke api to generate random user names:
 ```REACT_APP_POKE_API = https://pokeapi.co/api/v2/pokemon```  
-- `REACT_APP_ROOM_URL` is the server url of the application
-- `REACT_APP_SERVER_URL` is the server url with route `/room`  
+- `REACT_APP_ROOM_URL` = server url of the application
+- `REACT_APP_SERVER_URL` = the server url with route `/room`  
+- `REACT_APP_STUN_URL` = STUN server URL
+- `REACT_APP_TURN_URL` = TURN server URL
+- `REACT_APP_TURN_USERNAME` = TURN server username
+- `REACT_APP_TURN_CREDENTIAL` = TURN server credential
+  
+*STUN server could be self-built with server url, or any public STUN servers.*  
+*TURN server URL, USERNAME, CREDENTIAL could be a public one or registered one.*
 
 *Note that when running locally, the server url should be* `http://localhost:PORT`  
 
@@ -39,8 +46,9 @@ $ npm start
 **Tech Stack**
 * React
 * Sass
-* Node.js
+* Node.js / Express.js
 * MongoDB - Mongoose
+* Redux
 * figma (for prototype)
 
 **Resources/Tools/Methods**
@@ -51,6 +59,7 @@ $ npm start
 * [React Bootstrap](https://react-bootstrap.github.io/)
 * [animation.css](https://animate.style/)
 * [PokeAPI](https://pokeapi.co/)
+* [STUN & TRUN server](https://www.metered.ca/tools/openrelay/#overview)
   
 ## Prototype  
 

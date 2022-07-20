@@ -1,30 +1,23 @@
+import axios from "axios";
 import { io } from "socket.io-client";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ChannelBar from "../../components/ChannelBar/ChannelBar";
 import TextChannel from "../../components/TextChannel/TextChannel";
-import "./ChatRoom.scss";
-import { useEffect, useState } from "react";
-import React from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { validateRoom } from "../../utils/utils";
+import { join } from "../../reducers/user";
 import "./ChatRoom.scss";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 function ChatRoom() {
     let room = useParams().id;
+    const dispatch = useDispatch();
 
-    const checkParam = () => {
-        axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(() => {
-            return;
-        }).catch((e) => {
-            window.location.replace("/404");
-        })
-    }
+    validateRoom(room);
 
-    checkParam();
-
-    const [user, setUser] = useState({ userID: "", username: "" });
-
+    const user = useSelector((state) => state.user.value);
     const emitJoin = () => {
         socket.emit("join", room, (data) => {
             // console.log("emit join")
@@ -39,7 +32,7 @@ function ChatRoom() {
         const randomNum = Math.floor(Math.random() * 897) + 1;
         axios.get(`${process.env.REACT_APP_POKE_API}/${randomNum}`).then((response) => {
             // console.log("in current user")
-            setUser({ userID: userID, username: response.data.name });
+            dispatch(join({ userID: userID, username: response.data.name }))
         }).catch(e => console.log(e))
     }
 
@@ -79,8 +72,8 @@ function ChatRoom() {
 
     return (
         <main className="room">
-            <ChannelBar username={user.username} userID={user.userID} room={room} socket={socket} />
-            <TextChannel userID={user.userID} username={user.username} socket={socket} room={room} />
+            <ChannelBar socket={socket} />
+            <TextChannel socket={socket} />
         </main>
     )
 }

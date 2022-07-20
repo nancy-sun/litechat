@@ -1,17 +1,22 @@
-import React, { useState, useRef, useEffect } from "react";
-import ChannelUser from "../ChannelUser/ChannelUser";
-import Peer from "simple-peer";
 import axios from "axios";
-import soundOnIcon from "../../assets/soundon.svg";
-import soundOffIcon from "../../assets/soundoff.svg";
-import { getColorByName } from "../../utils/utils";
-import "./ChannelBar.scss";
+import Peer from "simple-peer";
+import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import ChannelUser from "../ChannelUser/ChannelUser";
 import ChannelBarHead from "../ChannelBarHead/ChannelBarHead";
 import Control from "../Control/Control";
+import { setColor } from "../../reducers/userColor";
+import { getColorByName } from "../../utils/utils";
+import soundOnIcon from "../../assets/soundon.svg";
+import soundOffIcon from "../../assets/soundoff.svg";
+import { ICE_SERVERS } from "../../utils/mediaUtils";
+import "./ChannelBar.scss";
 
+function ChannelBar({ socket }) {
 
-function ChannelBar({ username, userID, room, socket }) {
-
+    let room = useParams().id;
+    const user = useSelector((state) => state.user.value);
     const [voiceEnter, setVoiceEnter] = useState(false);
 
     const userAudio = useRef();
@@ -20,7 +25,7 @@ function ChannelBar({ username, userID, room, socket }) {
     const peersRef = useRef([]);
 
     const newVoiceUser = () => {
-        axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { username: username, userID: userID })
+        axios.put(`${process.env.REACT_APP_ROOM_URL}/${room}/user`, { username: user.username, userID: user.userID })
             .then((response) => {
                 return;
             }).catch(e => console.log(e));
@@ -80,16 +85,7 @@ function ChannelBar({ username, userID, room, socket }) {
             initiator: true,
             trickle: false,
             stream: stream,
-            // config: {
-            //     iceServers: [
-            //         {
-            //             urls:  //stun server
-            //         },
-            //         {
-            //             urls: //turn server
-            //         }
-            //     ]
-            // },
+            config: { iceServers: ICE_SERVERS }
         });
 
         peer.on("signal", (signal) => {
@@ -104,6 +100,7 @@ function ChannelBar({ username, userID, room, socket }) {
             initiator: false,
             trickle: false,
             stream,
+            config: { iceServers: ICE_SERVERS }
         })
 
         peer.on("signal", (signal) => {
@@ -113,11 +110,13 @@ function ChannelBar({ username, userID, room, socket }) {
         return peer;
     }
 
-    const [userColor, setUserColor] = useState("000");
+    const dispatch = useDispatch();
+    const userColor = useSelector((state) => state.avatar.value);
+
 
     useEffect(() => {
-        setUserColor(getColorByName(username));
-    }, [username])
+        dispatch(setColor(getColorByName(user.username)));
+    }, [user.username])
 
     const [selfVoice, setSelfVoice] = useState(true);
     const [voiceConfig, setVoiceConfig] = useState([]);
@@ -144,16 +143,15 @@ function ChannelBar({ username, userID, room, socket }) {
         }
     }
 
-
     return (
         <div className="channel">
-            <ChannelBarHead username={username} />
+            <ChannelBarHead />
             <button className="channel__voice" onClick={enterVoice}> voice</button>
             {voiceEnter &&
                 <div className="user">
                     <audio ref={userAudio} muted autoPlay />
                     <div className="user__avatar" style={{ "backgroundColor": `#${userColor}` }}></div>
-                    <p className="user__name user__name--self">{username}</p>
+                    <p className="user__name user__name--self">{user.username}</p>
                     <button className="user__status">
                         <img className="user__status--icon" src={selfVoice ? soundOnIcon : soundOffIcon} alt="sound" onClick={toggleVoice} />
                     </button>
@@ -162,7 +160,7 @@ function ChannelBar({ username, userID, room, socket }) {
             <div className="channel__users">
                 {Array.from(new Set(peers.map((peer) => {
                     return (
-                        <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} room={room} />
+                        <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} />
                     )
                 })))}
             </div>

@@ -18,7 +18,7 @@
 
     &__head {
         display: flex;
-        height: 3rem;
+        min-height: 3rem;
         align-items: center;
         box-sizing: border-box;
         border-bottom: 2px $primary-light solid;

@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { getColorByName } from "../../utils/utils";
 import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getColorByName } from "../../utils/utils";
+import { useSelector } from "react-redux";
 import "./ChannelUser.scss";
 
 
-function ChannelUser({ peer, peerID, room }) {
+function ChannelUser({ peer, peerID }) {
+    let room = useParams().id;
 
     const ref = useRef();
     const [username, setUsername] = useState("anonymous")
