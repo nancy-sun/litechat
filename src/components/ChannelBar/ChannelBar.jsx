@@ -159,7 +159,6 @@ function ChannelBar({ socket }) {
             }
             <div className="channel__users">
                 {Array.from(new Set(peers.map((peer) => {
-                    console.log(peer)
                     return (
                         <ChannelUser key={peer.peerID} peer={peer.peer} peerID={peer.peerID} />
                     )

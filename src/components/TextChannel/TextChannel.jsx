@@ -99,7 +99,6 @@ function TextChannel({ socket }) {
         newJoin();
     }, [socket])
 
-    console.log(messageHistory)
     return (
         <div className="text">
             <div className="text__head">
