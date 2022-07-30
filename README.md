@@ -72,7 +72,7 @@ $ npm start
 * [figma streamline plugin](https://streamline.canny.io/)
 * [screen size mockup](https://www.figma.com/community/file/1103958429333309485)
   
-![prototype](https://user-images.githubusercontent.com/99620863/177220923-e7ba5244-c4c8-4ee5-99c9-a992e0fc1a87.svg)
+![litechatPrototype](https://user-images.githubusercontent.com/99620863/181903772-a6928890-fb69-4f5e-a166-6f97ca27547d.svg)
   
 ## New Features
 - [x] sound/voice configuring
