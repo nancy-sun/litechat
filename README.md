@@ -73,8 +73,6 @@ $ npm start
 * [screen size mockup](https://www.figma.com/community/file/1103958429333309485)
   
 ![litechatPrototype](https://user-images.githubusercontent.com/99620863/181903772-a6928890-fb69-4f5e-a166-6f97ca27547d.svg)
-  
-## New Features
-- [x] sound/voice configuring
-- [ ] video chat
-- [ ] optional login to save a room
+
+## Author  
+[@Nancy](https://github.com/nancy-sun)   
