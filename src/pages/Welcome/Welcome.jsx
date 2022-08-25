@@ -4,10 +4,7 @@ import About from "../../components/About/About";
 import 'animate.css';
 import "./Welcome.scss";
 
-
-
 function Welcome() {
-
     const createRoom = () => {
         axios.post(process.env.REACT_APP_ROOM_URL).then(response => {
             const room = response.data._id;
