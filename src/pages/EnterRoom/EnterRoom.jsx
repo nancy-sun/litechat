@@ -4,7 +4,6 @@ import pointIcon from "../../assets/pointFinger.svg";
 import About from "../../components/About/About";
 import "./EnterRoom.scss";
 
-
 function EnterRoom() {
     const joinRoom = (event) => {
         event.target.room.classList.remove("box__input--invalid");
