@@ -9,5 +9,6 @@ export const avatarSlice = createSlice({
         }
     }
 });
+
 export const { setColor } = avatarSlice.actions;
 export default avatarSlice.reducer;
