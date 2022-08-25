@@ -9,5 +9,6 @@ export const userSlice = createSlice({
         }
     }
 });
+
 export const { join } = userSlice.actions;
 export default userSlice.reducer;
