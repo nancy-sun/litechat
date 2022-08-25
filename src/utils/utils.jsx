@@ -17,6 +17,4 @@ const validateRoom = (room) => {
     })
 }
 
-
-
 export { getColorByName, validateRoom };
