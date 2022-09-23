@@ -3,16 +3,27 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import About from "../About/About";
 import UserBanner from "../UserBanner/UserBanner";
-import "./TextChannel.scss"
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import "./TextChannel.scss"
 
 function TextChannel({ socket }) {
     let room = useParams().id;
     const [messageHistory, setMessageHistory] = useState([]);
+
     const user = useSelector((state) => state.user.value);
 
+    const messagesEndRef = useRef();
+
+    const newJoin = () => {
+        socket.on("newJoin", (data) => {
+            let msg = {
+                status: "join",
+                user: data
+            }
+            setMessageHistory((messageHistory) => [...messageHistory, msg]);
+        })
+    }
 
     const getMsgs = () => {
         axios.get(`${process.env.REACT_APP_ROOM_URL}/${room}`).then(response => {
@@ -68,6 +79,10 @@ function TextChannel({ socket }) {
         })
     }
 
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
     useEffect(() => {
         receiveMsg();
     }, [socket])
@@ -76,24 +91,10 @@ function TextChannel({ socket }) {
         getMsgs();
     }, [])
 
-    const messagesEndRef = useRef();
-
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
     useEffect(() => {
         scrollToBottom()
     }, [messageHistory]);
 
-    const newJoin = () => {
-        socket.on("newJoin", (data) => {
-            let msg = {
-                status: "join",
-                user: data
-            }
-            setMessageHistory((messageHistory) => [...messageHistory, msg]);
-        })
-    }
 
     useEffect(() => {
         newJoin();
